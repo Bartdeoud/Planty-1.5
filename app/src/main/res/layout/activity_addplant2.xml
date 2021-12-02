@@ -4,30 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DDDBD4"
     tools:context=".addplant2">
 
     <ImageView
-        android:layout_marginStart="150dp"
-        android:layout_marginBottom="60dp"
+        android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/image_view"
+        android:layout_marginStart="150dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="340dp"
+        android:backgroundTint="#0C510E"
         android:onClick="makePicture"
-        android:text="Button"
+        android:text="Take Picture"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etGivePlantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/input_bg"
+        android:ems="10"
+        android:hint="Give me a name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="#0C510E"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/button_picture"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="@+id/button_picture"
+        app:layout_constraintTop_toBottomOf="@+id/button_picture" />
 </androidx.constraintlayout.widget.ConstraintLayout>

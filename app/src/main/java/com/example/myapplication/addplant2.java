@@ -29,7 +29,7 @@ public class addplant2 extends AppCompatActivity {
         imageView = findViewById(R.id.image_view);
         btOpen = findViewById(R.id.button_picture);
 
-        //Request for camera permissions
+        //Request camera permissions
         if (ContextCompat.checkSelfPermission(addplant2.this,
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(addplant2.this,
@@ -51,10 +51,13 @@ public class addplant2 extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
-            //Get Capture image
+            //Get capture image
             Bitmap captureImage = (Bitmap) data.getExtras().get("data");
             //Set capture image to ImageView
             imageView.setImageBitmap(captureImage);
         }
+    }
+
+    public void makePicture(View view) {
     }
 }

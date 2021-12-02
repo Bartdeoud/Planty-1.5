@@ -15,17 +15,16 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
 
-        final Button button = findViewById(R.id.btnLogIn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
+    }
+
+    public void Inloggen(View view) {
                 //in - inside / out -outside
                 EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
                 String Inmail = inMailET.getText().toString();
 
                 //checks with database
-                String outPassword = "1";
+                String outPassword = "134567";
 
                 EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
                 String InPassword = inPasswordET.getText().toString();
@@ -34,7 +33,5 @@ public class LogIn extends AppCompatActivity {
                     Intent myIntent = new Intent(LogIn.this, MainActivity.class);
                     startActivity(myIntent);
                 }
-            }
-        });
     }
 }

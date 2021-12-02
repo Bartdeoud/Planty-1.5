@@ -84,7 +84,7 @@
         android:id="@+id/Loginbtn"
         android:layout_width="350dp"
         android:layout_height="51dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="#FFFFFF"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -135,7 +135,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/Loginbtn"
-        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintHorizontal_bias="0.717"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 

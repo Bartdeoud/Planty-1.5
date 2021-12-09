@@ -35,8 +35,8 @@ public class LogIn extends AppCompatActivity {
         boolean autenticated = false;
 
         //in - inside / out -outside
-        EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
-        String Inmail = inMailET.getText().toString();
+        //EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
+        //String Inmail = inMailET.getText().toString();
 
         //checks with database
         String outPassword = "1";

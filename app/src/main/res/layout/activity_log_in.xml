@@ -129,9 +129,11 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <TextView
+        android:id="@+id/signInButon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:onClick="ButtonSignin"
         android:text="@string/sign_up"
         android:textColor="@color/black"
         android:textStyle="bold"

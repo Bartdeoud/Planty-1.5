@@ -7,27 +7,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
+import android.widget.TextView;
 
 public class LogIn extends AppCompatActivity {
 
     Button btLogin;
+    TextView btSignin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-            btLogin = findViewById(R.id.Loginbtn);
+        btLogin = findViewById(R.id.Loginbtn);
+        btSignin = findViewById(R.id.signInButon);
 
-            btLogin.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        btSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Singinpage = new Intent(LogIn.this, SignUp.class);
+                startActivity(Singinpage);
+            }
+        });
 
-                    if (CheckLoginData()){
-                        Intent mainActivityintent = new Intent(LogIn.this, MainActivity.class);
-                        startActivity(mainActivityintent);
-                    }
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (CheckLoginData()){
+                    Intent mainActivityintent = new Intent(LogIn.this, MainActivity.class);
+                    startActivity(mainActivityintent);
                 }
-            });
+            }
+        });
     }
 
 
@@ -35,8 +46,8 @@ public class LogIn extends AppCompatActivity {
         boolean autenticated = false;
 
         //in - inside / out -outside
-        //EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
-        //String Inmail = inMailET.getText().toString();
+        EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
+        String Inmail = inMailET.getText().toString();
 
         //checks with database
         String outPassword = "1";
@@ -51,5 +62,8 @@ public class LogIn extends AppCompatActivity {
     }
 
     public void buttonlogin(View view) {
+    }
+
+    public void ButtonSignin(View view) {
     }
 }

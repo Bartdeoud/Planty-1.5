@@ -19,8 +19,8 @@ public class ConnectionHelper
         database = "planty";
 
         uname = "Lucas";
-        pass = "Kaaskoekje123";
-        port = "3306";
+        pass = "admin";
+        port = "123";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

@@ -15,34 +15,30 @@ public class ConnectionHelper
 
     public Connection Connectionclass()
     {
-        ip = "localhost";
-        database = "planty";
+        ip = "192.168.2.19";
+        database = "master";
 
-        uname = "admin2";
-        pass = "admin2";
-        port = "planty4life";
+        uname = "sa";
+        pass = "planty4life";
+        port = "1433";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Connection connection = null;
+        con = null;
         String ConnectionURL = null;
 
         try
         {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnectionURL = "jdbc:jtds:sqlserver://"
-                    + ip + ":"
-                    + port + ";"
-                    + "databasename=" + database + ";user="
-                    + uname + ";password=" + pass + ";";
-            connection = DriverManager.getConnection(ConnectionURL);
+            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ":" + port + ";" + "databasename=" + database + ";user=" + uname + ";password=" + pass + ";";
+            con = DriverManager.getConnection(ConnectionURL);
         }
         catch (Exception ex)
         {
             Log.e("Error ", ex.getMessage());
         }
 
-        return connection;
+        return con;
     }
 }

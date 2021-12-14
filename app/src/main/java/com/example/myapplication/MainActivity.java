@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     //extra
     Connection connect;
     String ConnectionResult = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void GetTechtFromSQL(View view) {
+    public void GetTechFromSQL(View view) {
         TextView tx1 = (TextView) findViewById(R.id.textView2);
         TextView tx2 = (TextView) findViewById(R.id.textView9);
 
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             ConnectionHelper connectionHelper = new ConnectionHelper();
             connect = connectionHelper.Connectionclass();
             if (connect != null) {
-                String query = "Select * from bedrijf";
+                String query = "SELECT * FROM Gebruiker";
                 Statement st = connect.createStatement();
                 ResultSet rs = st.executeQuery(query);
 
@@ -81,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 ConnectionResult = "Check Connection";
+                tx1.setText("failed");
             }
         } catch (Exception ex) {
             Log.e("Error ", ex.getMessage());

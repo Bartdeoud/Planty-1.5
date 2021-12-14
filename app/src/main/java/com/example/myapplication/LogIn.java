@@ -24,8 +24,8 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        btLogin = findViewById(R.id.Loginbtn);
         btSignin = findViewById(R.id.signInButon);
+        btLogin = findViewById(R.id.Loginbtn);
 
         btSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +38,6 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (CheckLoginData()) {
                     Intent mainActivityintent = new Intent(LogIn.this, MainActivity.class);
                     startActivity(mainActivityintent);
@@ -67,7 +66,7 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                 connect = connectionHelper.Connectionclass();
                 if (connect != null) {
                     //query statement
-                    String query = "SELECT Wachtwoord FROM Gebruiker WHERE Email = '" + inMailET.getText().toString() + "'";
+                    String query = "SELECT Wachtwoord FROM Gebruiker WHERE Email = '" + Inmail + "'";
                     Statement st = connect.createStatement();
                     ResultSet rs = st.executeQuery(query);
 
@@ -82,8 +81,8 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                 Log.e("Error ", ex.getMessage());
             }
 
+            //checks if passwords are the same
             String InPassword = inPasswordET.getText().toString();
-
             if ((InPassword.toString()).equals(outPassword)) {
                 autenticated = true;
             }

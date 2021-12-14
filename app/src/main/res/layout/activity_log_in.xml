@@ -138,7 +138,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/Loginbtn"
-        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 

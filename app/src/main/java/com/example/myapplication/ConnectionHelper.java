@@ -18,9 +18,9 @@ public class ConnectionHelper
         ip = "localhost";
         database = "planty";
 
-        uname = "Lucas";
-        pass = "admin";
-        port = "123";
+        uname = "admin2";
+        pass = "admin2";
+        port = "planty4life";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -38,7 +38,6 @@ public class ConnectionHelper
                     + uname + ";password=" + pass + ";";
             connection = DriverManager.getConnection(ConnectionURL);
         }
-
         catch (Exception ex)
         {
             Log.e("Error ", ex.getMessage());

@@ -38,9 +38,6 @@ import java.sql.Statement;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    //extra
-    Connection connect;
-    String ConnectionResult = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,31 +57,5 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    public void GetTechFromSQL(View view) {
-        TextView tx1 = (TextView) findViewById(R.id.textView2);
-        TextView tx2 = (TextView) findViewById(R.id.textView9);
-
-        try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.Connectionclass();
-            if (connect != null) {
-                String query = "SELECT * FROM Gebruiker";
-                Statement st = connect.createStatement();
-                ResultSet rs = st.executeQuery(query);
-
-                while (rs.next()) {
-                    tx1.setText(rs.getString(1));
-                    tx2.setText(rs.getString(2));
-                }
-            } else {
-                ConnectionResult = "Check Connection";
-                tx1.setText("failed");
-            }
-        } catch (Exception ex) {
-            Log.e("Error ", ex.getMessage());
-        }
-
     }
 }

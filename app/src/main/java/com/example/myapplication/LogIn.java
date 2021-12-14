@@ -4,13 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 import android.widget.TextView;
 
-public class LogIn extends AppCompatActivity {
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class LogIn<inPasswordET> extends AppCompatActivity {
 
     Button btLogin;
     TextView btSignin;
@@ -34,7 +39,7 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (CheckLoginData()){
+                if (CheckLoginData()) {
                     Intent mainActivityintent = new Intent(LogIn.this, MainActivity.class);
                     startActivity(mainActivityintent);
                 }
@@ -42,31 +47,64 @@ public class LogIn extends AppCompatActivity {
         });
     }
 
-
-    public boolean CheckLoginData(){
+    public boolean CheckLoginData() {
+        Connection connect;
+        String ConnectionResult = "";
         boolean autenticated = false;
         EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
         EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
-        if(TextUtils.isEmpty(inMailET.getText())){
-            inMailET.setError("Empty");
-        }
-        if(TextUtils.isEmpty(inPasswordET.getText())){
-            inPasswordET.setError("Empty");
-        }
-        //in - inside / out -outside
+        String outPassword = "";
 
-        String Inmail = inMailET.getText().toString();
+        if (CheckIfFilled(inMailET.getText().toString(), inPasswordET.getText().toString())) {
 
-        //checks with database
-        String outPassword = "1";
+            //in - inside / out -outside
 
+            String Inmail = inMailET.getText().toString();
 
-        String InPassword = inPasswordET.getText().toString();
+            //connection with database
+            try {
+                ConnectionHelper connectionHelper = new ConnectionHelper();
+                connect = connectionHelper.Connectionclass();
+                if (connect != null) {
+                    //query statement
+                    String query = "SELECT Wachtwoord FROM Gebruiker WHERE Email = '" + inMailET.getText().toString() + "'";
+                    Statement st = connect.createStatement();
+                    ResultSet rs = st.executeQuery(query);
 
-        if ((InPassword.toString()).equals(outPassword)){
-            autenticated = true;
+                    while (rs.next()) {
+                        //puts query output in string
+                        outPassword = rs.getString(1).toString();
+                    }
+                } else {
+                    ConnectionResult = "Check Connection";
+                }
+            } catch (Exception ex) {
+                Log.e("Error ", ex.getMessage());
+            }
+
+            String InPassword = inPasswordET.getText().toString();
+
+            if ((InPassword.toString()).equals(outPassword)) {
+                autenticated = true;
+            }
         }
         return autenticated;
+    }
+
+    //checks if all boxes al filled
+    public boolean CheckIfFilled(String text1, String text2){
+        boolean FilledIn = true;
+        if(TextUtils.isEmpty(text1)){
+            EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
+            inMailET.setError("Empty");
+            FilledIn = false;
+        }
+        if(TextUtils.isEmpty(text2)){
+            EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
+            inPasswordET.setError("Empty");
+            FilledIn = false;
+        }
+        return FilledIn;
     }
 
     public void buttonlogin(View view) {

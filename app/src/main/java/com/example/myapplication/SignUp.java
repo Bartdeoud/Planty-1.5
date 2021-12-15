@@ -48,9 +48,7 @@ public class SignUp extends AppCompatActivity {
 
                 if(checkList()){
                     int Gebruikersnummer = 0;
-                    Intent loginpage = new Intent(SignUp.this, LogIn.class);
-                    startActivity(loginpage);
-
+                    /*/
                     try {
                         ConnectionHelper connectionHelper = new ConnectionHelper();
                         connect = connectionHelper.Connectionclass();
@@ -68,23 +66,25 @@ public class SignUp extends AppCompatActivity {
                     } catch (Exception ex) {
                         Log.e("Error ", ex.getMessage());
                     }
-
+                    /*/
                     try {
                         ConnectionHelper connectionHelper = new ConnectionHelper();
                         connect = connectionHelper.Connectionclass();
                         if (connect != null) {
                             //query statement
-                            String query = "INSERT INTO Gebruiker (Gebruikercode ,Voornaam ,Achternaam ,Telefoonnummer ,Email ,Wachtwoord ,Bedrijf ,Adres) VALUES (" + Gebruikersnummer + ", " + firstName + ", " + lastName + ", " + telephone + ", " + email + ", " + password + ", " + address + ")";
-                            Statement st = connect.createStatement();
-                            ResultSet rs = st.executeQuery(query);
+                            Connection con = connectionHelper.Connectionclass();
+                            String query = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Wachtwoord, Bedrijf, Adres) VALUES (" + "1003" + ", " + firstName + ", " + lastName + ", " + telephone + ", " + email + ", " + password + ", " + company + ", " + address + ")";
+                            Statement stmt = con.createStatement();
+                            stmt.executeUpdate(query);
                         } else {
                             ConnectionResult = "Check Connection";
                         }
                     } catch (Exception ex) {
                         Log.e("Error ", ex.getMessage());
                     }
+                    Intent loginpage = new Intent(SignUp.this, LogIn.class);
+                    startActivity(loginpage);
                 }
-
             }
         });
     }

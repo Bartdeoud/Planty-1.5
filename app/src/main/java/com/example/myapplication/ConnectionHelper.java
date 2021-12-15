@@ -22,7 +22,7 @@ public class ConnectionHelper
     public Connection Connectionclass()
     {
             //local ip adress from cmd
-            ip = "145.52.146.194";
+            ip = "192.168.2.13";
             database = "master";
             //acces data
             uname = "sa";

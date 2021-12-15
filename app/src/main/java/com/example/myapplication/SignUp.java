@@ -74,7 +74,7 @@ public class SignUp extends AppCompatActivity {
                         connect = connectionHelper.Connectionclass();
                         if (connect != null) {
                             //query statement
-                            String query = "INSERT INTO Gebruiker (Gebruikercode ,Voornaam ,Achternaam ,Telefoonnummer ,Email ,Wachtwoord ,Bedrijf ,Adres) VALUES " + Gebruikersnummer + ", " + firstName + ", " + lastName + ", " + telephone + ", " + email + ", " + password + ", " + address;
+                            String query = "INSERT INTO Gebruiker (Gebruikercode ,Voornaam ,Achternaam ,Telefoonnummer ,Email ,Wachtwoord ,Bedrijf ,Adres) VALUES (" + Gebruikersnummer + ", " + firstName + ", " + lastName + ", " + telephone + ", " + email + ", " + password + ", " + address + ")";
                             Statement st = connect.createStatement();
                             ResultSet rs = st.executeQuery(query);
                         } else {

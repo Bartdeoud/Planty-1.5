@@ -48,7 +48,7 @@ public class SignUp extends AppCompatActivity {
                 passwordConfirm = (EditText) findViewById(R.id.input_ConfPassword);
 
 
-                //if(checkList()){
+                if(checkList()){
                     int Gebruikersnummer = 0;
 
                     try {
@@ -56,11 +56,11 @@ public class SignUp extends AppCompatActivity {
                         connect = connectionHelper.Connectionclass();
                         if (connect != null) {
                             //query statement
-                            String query = "SELECT Gebruikercode FROM Gebruiker";
+                            String query = "SELECT Gebruikercode FROM Gebruiker ORDER BY Gebruikercode";
                             Statement st = connect.createStatement();
                             ResultSet rs = st.executeQuery(query);
                             while (rs.next()){
-                                Gebruikersnummer = Integer.parseInt(rs.getString(1) + 1);
+                                Gebruikersnummer = Integer.parseInt(rs.getString(1).substring(0, rs.getString(1).length() - 2)) + 1;
                             }
                         } else {
                             ConnectionResult = "Check Connection";
@@ -75,8 +75,8 @@ public class SignUp extends AppCompatActivity {
                         if (connect != null) {
                             //query statement
                             Connection con = connectionHelper.Connectionclass();
-                            //String query = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Wachtwoord, Bedrijf, Adres) VALUES ('" + "1004" + "', '" + firstName + "', '" + lastName + "', '" + telephone + "', '" + email + "', '" + password + "', '" + company + "', '" + address + "')";
-                            String query = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Wachtwoord, Bedrijf, Adres) VALUES ('1003', 'Bart', 'de Jong', '06123456', 'it@hhs.nl', '23', '1', '9876TY')";
+                            String query = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Wachtwoord, Bedrijf, Adres) VALUES ('" + Gebruikersnummer + "', '" + firstName.getText() + "', '" + lastName.getText() + "', '" + telephone.getText() + "', '" + email.getText() + "', '" + password.getText() + "', '" + "1" + "', '" + address.getText() + "')";
+                            System.out.println(query);
                             PreparedStatement prepsInsertProduct = con.prepareStatement(query);
                             prepsInsertProduct.execute();
                         } else {
@@ -85,43 +85,9 @@ public class SignUp extends AppCompatActivity {
                     } catch (Exception ex) {
                         Log.e("Error ", ex.getMessage());
                     }
-/*/
-                    String ip, database, uname, pass, port;
-
-                    //local ip adress from cmd
-                    ip = "145.52.145.105";
-                    database = "master";
-                    //acces data
-                    uname = "sa";
-                    pass = "planty4life";
-                    port = "1433";
-                    String ConnectionURL = null;
-                    //String query = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Wachtwoord, Bedrijf, Adres) VALUES ('" + "1004" + "', '" + firstName + "', '" + lastName + "', '" + telephone + "', '" + email + "', '" + password + "', '" + company + "', '" + address + "')";
-                    String query = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Wachtwoord, Bedrijf, Adres) VALUES ('1003', 'Bart', 'de Jong', '06123456', 'it@hhs.nl', '23', '1', '9876TY')";
-                ResultSet resultSet = null;
-                        try {
-                            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ":" + port + ";" + "databasename=" + database + ";user=" + uname + ";password=" + pass + ";";
-                            Connection connection = DriverManager.getConnection(ConnectionURL);
-                            ConnectionHelper connectionHelper = new ConnectionHelper();
-                            Connection connect2 = connectionHelper.Connectionclass();
-                            PreparedStatement prepsInsertProduct = connection.prepareStatement(query);
-                            prepsInsertProduct.execute();
-                            // Retrieve the generated key from the insert.
-                            resultSet = prepsInsertProduct.getGeneratedKeys();
-
-                            // Print the ID of the inserted row.
-                            while (resultSet.next()) {
-                                System.out.println("Generated: " + resultSet.getString(1));
-                            }
-                        }
-                        // Handle any errors that may have occurred.
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
-/*/
                     Intent loginpage = new Intent(SignUp.this, LogIn.class);
                     startActivity(loginpage);
-                //}
+                }
             }
         });
     }
@@ -154,6 +120,9 @@ public class SignUp extends AppCompatActivity {
         //check if password are the same
         if(password.equals(passwordConfirm) && !password.toString().isEmpty()){
             same = true;
+        } else {
+            password.setError("Password not the same");
+            passwordConfirm.setError("Password not the same");
         }
         //checks if evryting is a go
         if(same && filled){

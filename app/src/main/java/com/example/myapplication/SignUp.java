@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Arrays;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -48,7 +50,7 @@ public class SignUp extends AppCompatActivity {
                 passwordConfirm = (EditText) findViewById(R.id.input_ConfPassword);
 
 
-                if(checkList()){
+                if(SignInValidator()){
                     int Gebruikersnummer = 0;
 
                     try {
@@ -91,7 +93,51 @@ public class SignUp extends AppCompatActivity {
             }
         });
     }
-    public static boolean checkList(){
+
+    public boolean SignInValidator(){
+        if(!FilledIn()){
+            return false;
+        }
+        if (EmailAlredyExist()){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean EmailAlredyExist(){
+        Connection connect;
+        String ConnectionResult = "";
+        EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
+        String Inmail = inMailET.getText().toString();
+        String[] listEmails = new String[100];
+        try {
+            ConnectionHelper connectionHelper = new ConnectionHelper();
+            connect = connectionHelper.Connectionclass();
+            if (connect != null) {
+                //query statement
+                String query = "SELECT Email FROM Gebruiker";
+                Statement st = connect.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                int i = 0;
+                while (rs.next()) {
+                    //puts query output in string
+                    i++;
+                    listEmails[i] = rs.getString(i).toString();
+                }
+            } else {
+                ConnectionResult = "Check Connection";
+            }
+        } catch (Exception ex) {
+            Log.e("Error ", ex.getMessage());
+        }
+        List<String> list = Arrays.asList(listEmails);
+        if(list.contains(Inmail)){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean FilledIn(){
         boolean authenticated = false;
         boolean filled = true;
         boolean same = false;

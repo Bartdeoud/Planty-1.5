@@ -11,8 +11,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class addplant2 extends AppCompatActivity {
@@ -41,10 +43,21 @@ public class addplant2 extends AppCompatActivity {
         btOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 100);
+                if(CheckIFFilled()) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, 100);
+                }
             }
         });
+    }
+
+    public boolean CheckIFFilled(){
+        EditText name = (EditText) findViewById(R.id.etGivePlantName);
+        if(TextUtils.isEmpty(name.getText())){
+           name.setError("Empty");
+           return false;
+       }
+        return true;
     }
 
     @Override

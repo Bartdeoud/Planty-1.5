@@ -107,22 +107,21 @@ public class SignUp extends AppCompatActivity {
     public boolean EmailAlredyExist(){
         Connection connect;
         String ConnectionResult = "";
-        EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
+        EditText inMailET = (EditText) findViewById(R.id.input_Email);
         String Inmail = inMailET.getText().toString();
-        String[] listEmails = new String[100];
+        String CountEmails = "";
+
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
             connect = connectionHelper.Connectionclass();
             if (connect != null) {
                 //query statement
-                String query = "SELECT Email FROM Gebruiker";
+                String query = "SELECT COUNT(Email) FROM Gebruiker WHERE Email = '" + Inmail + "';";
                 Statement st = connect.createStatement();
                 ResultSet rs = st.executeQuery(query);
-                int i = 0;
                 while (rs.next()) {
                     //puts query output in string
-                    i++;
-                    listEmails[i] = rs.getString(i).toString();
+                    CountEmails = rs.getString(1).toString();
                 }
             } else {
                 ConnectionResult = "Check Connection";
@@ -130,11 +129,11 @@ public class SignUp extends AppCompatActivity {
         } catch (Exception ex) {
             Log.e("Error ", ex.getMessage());
         }
-        List<String> list = Arrays.asList(listEmails);
-        if(list.contains(Inmail)){
-            return false;
+        if(Integer.parseInt(CountEmails) > 0){
+            inMailET.setError("Email alredy exist");
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean FilledIn(){
@@ -161,15 +160,15 @@ public class SignUp extends AppCompatActivity {
             if(TextUtils.isEmpty(passwordConfirm.getText())){
                 passwordConfirm.setError("Empty");
                 filled = false;
+            } else {
+                //check if password are the same
+                if(password.getText().toString().equals(passwordConfirm.getText().toString())){
+                    same = true;
+                } else {
+                    passwordConfirm.setError("Password not the same");
+                }
             }
 
-        //check if password are the same
-        if(password.equals(passwordConfirm) && !password.toString().isEmpty()){
-            same = true;
-        } else {
-            password.setError("Password not the same");
-            passwordConfirm.setError("Password not the same");
-        }
         //checks if evryting is a go
         if(same && filled){
             authenticated = true;

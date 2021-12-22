@@ -101,7 +101,65 @@ public class SignUp extends AppCompatActivity {
         if (EmailAlredyExist()){
             return false;
         }
+        //if(!bedrijfExist()){
+        //    return false;
+        //}
         return true;
+    }
+
+    public String Bedrijfscode = "";
+
+    public boolean bedrijfExist(){
+        Connection connect;
+        String ConnectionResult = "";
+        EditText inBedrijfET = (EditText) findViewById(R.id.input_Company);
+        String inBedrijf = inBedrijfET.getText().toString();
+        String CountEmails = "";
+        //counts the amout of same emails in database
+        try {
+            ConnectionHelper connectionHelper = new ConnectionHelper();
+            connect = connectionHelper.Connectionclass();
+            if (connect != null) {
+                //query statement
+                String query = "SELECT COUNT(Naam) FROM Gebruiker WHERE Naam = '" + inBedrijf + "';";
+                Statement st = connect.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    //puts query output in string
+                    CountEmails = rs.getString(1).toString();
+                }
+            } else {
+                ConnectionResult = "Check Connection";
+            }
+        } catch (Exception ex) {
+            Log.e("Error ", ex.getMessage());
+        }
+        if(Integer.parseInt(CountEmails) == 0){
+            inBedrijfET.setError("Company does not exist");
+            return false;
+        } else {
+            String companyNumber = "";
+            try {
+                ConnectionHelper connectionHelper = new ConnectionHelper();
+                connect = connectionHelper.Connectionclass();
+                if (connect != null) {
+                    //query statement
+                    String query = "SELECT Bedrijfcode FROM Bedrijf WHERE Naam = '" + inBedrijf + "';";
+                    Statement st = connect.createStatement();
+                    ResultSet rs = st.executeQuery(query);
+                    while (rs.next()) {
+                        //puts query output in string
+                        Bedrijfscode = rs.getString(1).toString();
+                        return true;
+                    }
+                } else {
+                    ConnectionResult = "Check Connection";
+                }
+            } catch (Exception ex) {
+                Log.e("Error ", ex.getMessage());
+            }
+        }
+        return false;
     }
 
     public boolean EmailAlredyExist(){
@@ -110,7 +168,7 @@ public class SignUp extends AppCompatActivity {
         EditText inMailET = (EditText) findViewById(R.id.input_Email);
         String Inmail = inMailET.getText().toString();
         String CountEmails = "";
-
+        //counts the amout of same emails in database
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
             connect = connectionHelper.Connectionclass();

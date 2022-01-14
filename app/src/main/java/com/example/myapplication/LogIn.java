@@ -95,12 +95,12 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
         boolean FilledIn = true;
         if(TextUtils.isEmpty(text1)){
             EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
-            inMailET.setError("Empty");
+            inMailET.setError("Fill in email");
             FilledIn = false;
         }
         if(TextUtils.isEmpty(text2)){
             EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
-            inPasswordET.setError("Empty");
+            inPasswordET.setError("Fill in password");
             FilledIn = false;
         }
         return FilledIn;

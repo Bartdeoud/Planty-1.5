@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/actor</item>
         <item>@font/alike_angular</item>
+        <item>@font/amethysta</item>
         <item>@font/asap_bold</item>
         <item>@font/belgrano</item>
+        <item>@font/caudex_bold</item>
+        <item>@font/caudex_bold_italic</item>
         <item>@font/droid_sans_bold</item>
+        <item>@font/droid_serif_bold</item>
+        <item>@font/happy_monkey</item>
+        <item>@font/montserrat</item>
+        <item>@font/montserrat_bold</item>
+        <item>@font/trirong_thin</item>
     </array>
 </resources>

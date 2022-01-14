@@ -20,14 +20,7 @@ import java.sql.PreparedStatement;
 
 public class SignUp extends AppCompatActivity {
 
-    public EditText firstName;
-    public EditText lastName;
-    public EditText address;
-    public EditText company;
-    public EditText telephone;
-    public EditText email;
-    public EditText password;
-    public EditText passwordConfirm;
+    public EditText firstName, lastName, address, company, telephone, email, password, passwordConfirm;
     public String Bedrijfscode = "";
 
     @Override
@@ -55,7 +48,7 @@ public class SignUp extends AppCompatActivity {
                     String query1 = "SELECT Gebruikercode FROM Gebruiker ORDER BY Gebruikercode";
                     String Gebruikerscode = commitQuery(query1);
                     Gebruikersnummer = Integer.parseInt(Gebruikerscode.substring(0, Gebruikerscode.length() - 2)) + 1;
-
+                //not using commitQuery() becous INSERT
                     try {
                         ConnectionHelper connectionHelper = new ConnectionHelper();
                         connect = connectionHelper.Connectionclass();
@@ -79,6 +72,7 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    //Main validator
     public boolean SignInValidator(){
         if(!FilledIn()){
             return false;
@@ -92,6 +86,7 @@ public class SignUp extends AppCompatActivity {
         return true;
     }
 
+    //checks if filled in bedijf exist & put Bedrijfcode in Bedrijfcode
     public boolean bedrijfExist(){
         String query1 = "SELECT COUNT(Naam) FROM Bedrijf WHERE Naam = '" + company.getText().toString() + "';";
         String companyCount = commitQuery(query1);
@@ -104,6 +99,7 @@ public class SignUp extends AppCompatActivity {
         return false;
     }
 
+    //Checks if Emal exist in database
     public boolean EmailAlredyExist(){
         EditText inMailET = (EditText) findViewById(R.id.input_Email);
         String Inmail = inMailET.getText().toString();
@@ -116,7 +112,7 @@ public class SignUp extends AppCompatActivity {
         return false;
     }
 
-
+    //For pushing query to sql and receiving data
     public String commitQuery(String query){
         Connection connect;
         String ConnectionResult = "";
@@ -141,6 +137,7 @@ public class SignUp extends AppCompatActivity {
         return result;
     }
 
+    //checks if every box is filled in
     public boolean FilledIn(){
         boolean authenticated = false;
         boolean filled = true;
@@ -174,7 +171,7 @@ public class SignUp extends AppCompatActivity {
                 }
             }
 
-        //checks if evryting is a go
+        //checks if everything is a go
         if(same && filled){
             authenticated = true;
         }

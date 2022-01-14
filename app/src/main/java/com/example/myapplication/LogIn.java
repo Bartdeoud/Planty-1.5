@@ -1,19 +1,20 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.content.Intent;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 public class LogIn<inPasswordET> extends AppCompatActivity {
 
@@ -59,7 +60,14 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
             //in - inside / out -outside
 
             String Inmail = inMailET.getText().toString();
+            /*/
+            String seed = "ipNumber";
+            String myIpValue = "192.168.0.1";
 
+            StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+            encryptor.setPassword(seed);
+            String encrypted = encryptor.encrypt(myIpValue);
+            /*/
             //connection with database
             try {
                 ConnectionHelper connectionHelper = new ConnectionHelper();

@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 public class SignUp extends AppCompatActivity {
 
@@ -55,7 +56,7 @@ public class SignUp extends AppCompatActivity {
                         if (connect != null) {
                             //query statement
                             Connection con = connectionHelper.Connectionclass();
-                            String query2 = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Wachtwoord, Bedrijf, Adres) VALUES ('" + Gebruikersnummer + "', '" + firstName.getText() + "', '" + lastName.getText() + "', '" + telephone.getText() + "', '" + email.getText() + "', '" + password.getText() + "', '" + Bedrijfscode + "', '" + address.getText() + "')";
+                            String query2 = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Bedrijf, Adres, Encription_key) VALUES ('" + Gebruikersnummer + "', '" + firstName.getText() + "', '" + lastName.getText() + "', '" + telephone.getText() + "', '" + email.getText() + "', '" + Bedrijfscode + "', '" + address.getText() + "', '" + GetEnqKey() +"')";
                             System.out.println(query2);
                             PreparedStatement prepsInsertProduct = con.prepareStatement(query2);
                             prepsInsertProduct.execute();
@@ -72,14 +73,26 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    public String GetEnqKey(){
+        EditText email2 = email;
+        EditText password2 = password;
+        String email = email2.getText().toString();
+        String password = password2.getText().toString();
+
+        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setPassword(email);
+        String encrypted = encryptor.encrypt(password);
+        return encrypted;
+    }
+
     //Main validator
     public boolean SignInValidator(){
         if(!FilledIn()){
             return false;
         }
-        if (EmailAlredyExist()){
-            return false;
-        }
+        //if (EmailAlredyExist()){
+        //    return false;
+        //}
         if(!bedrijfExist()){
             return false;
         }

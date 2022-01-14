@@ -20,6 +20,7 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
 
     Button btLogin;
     TextView btSignin;
+    public String key = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,10 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                     Intent mainActivityintent = new Intent(LogIn.this, MainActivity.class);
                     startActivity(mainActivityintent);
                 }
+                else{
+                    EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
+                    inPasswordET.setError("Password incorrect");
+                }
             }
         });
     }
@@ -53,34 +58,22 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
         boolean autenticated = false;
         EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
         EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
-        String outPassword = "";
+        String outKey = "";
 
         if (CheckIfFilled(inMailET.getText().toString(), inPasswordET.getText().toString())) {
-
-            //in - inside / out -outside
-
-            String Inmail = inMailET.getText().toString();
-            /*/
-            String seed = "ipNumber";
-            String myIpValue = "192.168.0.1";
-
-            StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-            encryptor.setPassword(seed);
-            String encrypted = encryptor.encrypt(myIpValue);
-            /*/
             //connection with database
             try {
                 ConnectionHelper connectionHelper = new ConnectionHelper();
                 connect = connectionHelper.Connectionclass();
                 if (connect != null) {
                     //query statement
-                    String query = "SELECT Wachtwoord FROM Gebruiker WHERE Email = '" + Inmail + "'";
+                    String query = "SELECT Encription_key FROM Gebruiker WHERE Email = '" + inMailET.getText().toString() + "'";
                     Statement st = connect.createStatement();
                     ResultSet rs = st.executeQuery(query);
 
                     while (rs.next()) {
                         //puts query output in string
-                        outPassword = rs.getString(1).toString();
+                        key = rs.getString(1).toString();
                     }
                 } else {
                     ConnectionResult = "Check Connection";
@@ -90,12 +83,26 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
             }
 
             //checks if passwords are the same
-            String InPassword = inPasswordET.getText().toString();
-            if ((InPassword.toString()).equals(outPassword)) {
+            if (Validated()) {
                 autenticated = true;
             }
         }
         return autenticated;
+    }
+
+    public boolean Validated(){
+        EditText email2 = findViewById(R.id.inputEmailAddress);
+        EditText password2 = findViewById(R.id.inputPassword);
+        String email = email2.getText().toString();
+
+        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+        encryptor.setPassword(email);
+
+        String decrypted = encryptor.decrypt(key);
+        if(decrypted.equals(password2.getText().toString())){
+            return true;
+        }
+        return false;
     }
 
     //checks if all boxes al filled

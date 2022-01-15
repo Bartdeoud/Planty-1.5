@@ -13,7 +13,7 @@
         android:layout_height="70dp"
         android:background="#DDDBD4"
         app:itemIconTint="@color/berde"
-        app:itemTextColor="#1F6120"
+        app:itemTextColor="@color/berde"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu" />
 

@@ -7,12 +7,35 @@
     tools:context=".Premium"
     android:background="#DDDBD4">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="31dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:srcCompat="@drawable/check_ic" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="305dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/alike_angular"
+        android:text="Unlock water reminders for all your plants"
+        android:textAlignment="gravity"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
     <Button
         android:id="@+id/btnMakeAccount3"
         android:layout_width="293dp"
         android:layout_height="48dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginBottom="140dp"
         android:backgroundTint="#0C400D"
         android:text=" Lifetime €49.99 (Most Value)"
         android:textAlignment="center"
@@ -53,7 +76,6 @@
         android:id="@+id/imageView"
         android:layout_width="31dp"
         android:layout_height="25dp"
-        android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toTopOf="@+id/textView12"
         app:srcCompat="@drawable/check_ic" />
@@ -63,11 +85,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/montserrat"
         android:text="Planty Premium"
         android:textColor="#1F6120"
-        android:textSize="25dp"
+        android:textSize="26dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,10 +97,13 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="160dp"
         android:fontFamily="@font/alike_angular"
         android:text="Add unlimited plants"
-        android:textSize="15dp"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="191dp" />
+        android:textAlignment="gravity"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnMakeAccount2"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

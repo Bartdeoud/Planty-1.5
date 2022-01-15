@@ -23,6 +23,8 @@ public class addplant2 extends AppCompatActivity {
 
     Button btOpen;
 
+    public static Bitmap imagePlant;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class addplant2 extends AppCompatActivity {
         if (requestCode == 100) {
             //Get capture image
             Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            imagePlant = captureImage;
             //Set capture image to ImageView
             imageView.setImageBitmap(captureImage);
         }

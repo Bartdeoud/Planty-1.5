@@ -20,7 +20,7 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
 
     Button btLogin;
     TextView btSignin;
-    public String key = "";
+    public String key = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +44,15 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                     Intent mainActivityintent = new Intent(LogIn.this, MainActivity.class);
                     startActivity(mainActivityintent);
                 }
-                else{
-                    EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
-                    inPasswordET.setError("Password incorrect");
-                }
             }
         });
     }
 
     public boolean CheckLoginData() {
         Connection connect;
-        String ConnectionResult = "";
         boolean autenticated = false;
         EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
         EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
-        String outKey = "";
 
         if (CheckIfFilled(inMailET.getText().toString(), inPasswordET.getText().toString())) {
             //connection with database
@@ -70,13 +64,11 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                     String query = "SELECT Encription_key FROM Gebruiker WHERE Email = '" + inMailET.getText().toString() + "'";
                     Statement st = connect.createStatement();
                     ResultSet rs = st.executeQuery(query);
-
+                    key = "";
                     while (rs.next()) {
                         //puts query output in string
-                        key = rs.getString(1).toString();
+                        key = rs.getString(1);
                     }
-                } else {
-                    ConnectionResult = "Check Connection";
                 }
             } catch (Exception ex) {
                 Log.e("Error ", ex.getMessage());
@@ -91,16 +83,29 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
     }
 
     public boolean Validated(){
-        EditText email2 = findViewById(R.id.inputEmailAddress);
-        EditText password2 = findViewById(R.id.inputPassword);
-        String email = email2.getText().toString();
+        try {
+            EditText email2 = findViewById(R.id.inputEmailAddress);
+            EditText password2 = findViewById(R.id.inputPassword);
+            String email = email2.getText().toString();
 
-        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(email);
+            if(key.equals("")){
+                email2.setError("Email does not exist");
+                return false;
+            }
+            else {
+                StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+                encryptor.setPassword(email);
 
-        String decrypted = encryptor.decrypt(key);
-        if(decrypted.equals(password2.getText().toString())){
-            return true;
+                String decrypted = encryptor.decrypt(key);
+                if (decrypted.equals(password2.getText().toString())) {
+                    return true;
+                }
+                else{
+                    password2.setError("Password incorrect");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

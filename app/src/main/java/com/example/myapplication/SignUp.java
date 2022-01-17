@@ -90,9 +90,9 @@ public class SignUp extends AppCompatActivity {
         if(!FilledIn()){
             return false;
         }
-        //if (EmailAlredyExist()){
-        //    return false;
-        //}
+        if (EmailAlredyExist()){
+            return false;
+        }
         if(!bedrijfExist()){
             return false;
         }

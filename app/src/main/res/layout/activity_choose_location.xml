@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChooseLocation"
-    android:background="#DDDBD4">
+    android:background="#DDDBD4"
+    tools:context=".ChooseLocation">
 
 
     <TextView
@@ -13,11 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
+        android:fontFamily="@font/montserrat"
         android:text="@string/choose_location"
         android:textColor="#1F6120"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,55 +39,61 @@
         android:id="@+id/ibPatio"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="116dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ibOffice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.382"
+        app:layout_constraintVertical_bias="0.245"
         app:srcCompat="@drawable/patio" />
 
     <ImageButton
         android:id="@+id/ibOffice"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toEndOf="@+id/ibPatio"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268"
+        app:layout_constraintVertical_bias="0.382"
         app:srcCompat="@drawable/kantoor" />
 
     <ImageButton
         android:id="@+id/ibBedroom"
         android:layout_width="94dp"
         android:layout_height="93dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="180dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ibKitchen"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.717"
         app:srcCompat="@drawable/bedroom" />
 
     <ImageButton
         android:id="@+id/ibKitchen"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="180dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ibBedroom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.714"
         app:srcCompat="@drawable/kitchen" />
 
     <ImageButton
         android:id="@+id/ibBalcony"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginBottom="180dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ibKitchen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toEndOf="@+id/ibKitchen"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/balcony" />
 
     <TextView

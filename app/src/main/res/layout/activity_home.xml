@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home"
-    android:background="#DDDBD4">
+    android:background="#DDDBD4"
+    tools:context=".Home">
 
     <TextView
         android:id="@+id/textView15"
@@ -31,12 +31,12 @@
         app:srcCompat="@drawable/userz" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
-        android:text="Ashley's Oasis"
+        android:text="'s Oasis"
         android:textColor="#1F6120"
         android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="@+id/imageButton"
@@ -55,66 +55,125 @@
         app:layout_constraintVertical_bias="0.323" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageViewP2"
         android:layout_width="92dp"
         android:layout_height="92dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:srcCompat="@drawable/bobbyz" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="96dp"
-        android:layout_height="92dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:srcCompat="@drawable/rosiez" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="81dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:srcCompat="@drawable/archie" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:text="Rosie"
-        android:textColor="#1F6120"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <ImageView
+        android:id="@+id/imageViewP5"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="244dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/textViewP1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="Bobby"
         android:textColor="#1F6120"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintBottom_toTopOf="@+id/imageViewP4"
+        app:layout_constraintStart_toStartOf="@+id/imageViewP1"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewP1"
+        app:layout_constraintVertical_bias="0.229" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/textViewP4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Archie"
+        android:layout_marginStart="8dp"
         android:textColor="#1F6120"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageViewP4"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewP4"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <TextView
+        android:id="@+id/textViewP2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textColor="#1F6120"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewP5"
+        app:layout_constraintStart_toStartOf="@+id/imageViewP2"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewP2"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <TextView
+        android:id="@+id/textViewP5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="#1F6120"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageViewP5"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewP5"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <ImageView
+        android:id="@+id/imageViewP3"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewP2"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <ImageView
+        android:id="@+id/imageViewP6"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="244dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewP5"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textViewP3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textColor="#1F6120"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewP6"
+        app:layout_constraintStart_toStartOf="@+id/imageViewP3"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewP3"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <TextView
+        android:id="@+id/textViewP6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="#1F6120"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageViewP6"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewP6"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <ImageView
+        android:id="@+id/imageViewP1"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewP2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <ImageView
+        android:id="@+id/imageViewP4"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="244dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewP5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

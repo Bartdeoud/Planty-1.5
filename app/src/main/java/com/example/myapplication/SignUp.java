@@ -126,9 +126,8 @@ public class SignUp extends AppCompatActivity {
     }
 
     //For pushing query to sql and receiving data
-    public String commitQuery(String query){
+    public static String commitQuery(String query){
         Connection connect;
-        String ConnectionResult = "";
         String result = "";
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
@@ -139,10 +138,8 @@ public class SignUp extends AppCompatActivity {
                 ResultSet rs = st.executeQuery(query);
                 while (rs.next()) {
                     //puts query output in string
-                    result = rs.getString(1).toString();
+                    result = rs.getString(1);
                 }
-            } else {
-                ConnectionResult = "Check Connection";
             }
         } catch (Exception ex) {
             Log.e("Error 001", ex.getMessage());

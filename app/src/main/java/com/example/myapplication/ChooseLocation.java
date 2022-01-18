@@ -2,16 +2,13 @@ package com.example.myapplication;
 
 import static com.example.myapplication.LogIn.gebruikerCode;
 import static com.example.myapplication.SignUp.commitQuery;
-import static com.example.myapplication.addplant2.imagePlant;
 import static com.example.myapplication.addplant2.plantName;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.Date;

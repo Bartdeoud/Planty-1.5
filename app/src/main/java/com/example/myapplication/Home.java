@@ -3,7 +3,6 @@ package com.example.myapplication;
 import static com.example.myapplication.LogIn.gebruikerCode;
 import static com.example.myapplication.SignUp.commitQuery;
 import static com.example.myapplication.addplant2.loadBitmap;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContextWrapper;

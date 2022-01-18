@@ -43,10 +43,10 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CheckLoginData()) {
-                    Intent mainActivityintent = new Intent(LogIn.this, MainActivity.class);
-                    startActivity(mainActivityintent);
-                }
+                //if (CheckLoginData()) {
+                    Intent Singinpage = new Intent(LogIn.this, Home.class);
+                    startActivity(Singinpage);
+                //}
             }
         });
     }
@@ -81,7 +81,9 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
             if (Validated()) {
                 autenticated = true;
                 String query = "select Gebruikercode From Gebruiker Where Email = '" + inMailET.getText().toString() + "'";
-                gebruikerCode = commitQuery(query);
+                String GebruikercodeTP = commitQuery(query);
+                gebruikerCode = GebruikercodeTP.substring(0, GebruikercodeTP.length() - 2);
+
             }
         }
         return autenticated;

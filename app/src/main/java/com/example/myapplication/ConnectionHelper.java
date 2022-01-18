@@ -4,8 +4,10 @@ package com.example.myapplication;
 import static java.net.InetAddress.getLocalHost;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.net.DatagramSocket;
 import java.net.InetAddress;

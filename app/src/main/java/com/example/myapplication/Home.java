@@ -6,9 +6,12 @@ import static com.example.myapplication.addplant2.loadBitmap;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +34,8 @@ public class Home extends AppCompatActivity {
 
     public String[] plantNames = new String[6];
 
+
+
     private void loadPlants(){
         ImageView imageView1 = findViewById(R.id.imageViewP1);
         ImageView imageView2 = findViewById(R.id.imageViewP2);
@@ -47,19 +52,19 @@ public class Home extends AppCompatActivity {
         getPlantNames();
         imageView1.setImageBitmap(loadBitmap(getFilePath(plantNames[0]).getPath()));
         text1.setText(plantNames[0]);
-        if (plantNames[1].equals("")) return;
+        if (plantNames[1] == null) return;
         imageView2.setImageBitmap(loadBitmap(getFilePath(plantNames[1]).getPath()));
         text2.setText(plantNames[1]);
-        if (plantNames[2].equals("")) return;
+        if (plantNames[2] == null) return;
         imageView3.setImageBitmap(loadBitmap(getFilePath(plantNames[2]).getPath()));
         text3.setText(plantNames[2]);
-        if (plantNames[3].equals("")) return;
+        if (plantNames[3] == null) return;
         imageView4.setImageBitmap(loadBitmap(getFilePath(plantNames[3]).getPath()));
         text4.setText(plantNames[3]);
-        if (plantNames[4].equals("")) return;
+        if (plantNames[4] == null) return;
         imageView5.setImageBitmap(loadBitmap(getFilePath(plantNames[4]).getPath()));
         text5.setText(plantNames[4]);
-        if (plantNames[5].equals("")) return;
+        if (plantNames[5] == null) return;
         imageView6.setImageBitmap(loadBitmap(getFilePath(plantNames[5]).getPath()));
         text6.setText(plantNames[5]);
     }
@@ -95,5 +100,23 @@ public class Home extends AppCompatActivity {
         File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File file = new File(fotoDirectory, fileName + ".png");
         return file;
+    }
+
+    public void buttonGotoHome(View view) {
+    }
+
+    public void buttonGotoWateringcycle(View view) {
+        Intent Singinpage = new Intent(Home.this, WateringCycle.class);
+        startActivity(Singinpage);
+    }
+
+    public void gotoAddplant(View view) {
+        Intent Singinpage = new Intent(Home.this, addplant2.class);
+        startActivity(Singinpage);
+    }
+
+    public void gotoPremium(View view) {
+        Intent Singinpage = new Intent(Home.this, Premium.class);
+        startActivity(Singinpage);
     }
 }

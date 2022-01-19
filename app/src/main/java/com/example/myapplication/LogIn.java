@@ -43,10 +43,10 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if (CheckLoginData()) {
+                if (CheckLoginData()) {
                     Intent Singinpage = new Intent(LogIn.this, Home.class);
                     startActivity(Singinpage);
-                //}
+                }
             }
         });
     }

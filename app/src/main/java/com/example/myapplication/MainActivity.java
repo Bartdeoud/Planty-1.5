@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         //Set home selected
         bottomNavigationView.setSelectedItemId(R.id.mainActivity);
 
+
         //set click listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -175,5 +175,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
+    <Button
+        android:id="@+id/buttonGotoHome"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/berde"
+        android:onClick="buttonGotoHome"
+        app:icon="@drawable/ic_home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/berde"
+        android:onClick="buttonGotoWateringcycle"
+        app:icon="@drawable/ic_water"
+        app:iconGravity="textEnd"
+        app:iconSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome"
+        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toEndOf="@+id/buttonGotoHome" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/berde"
+        android:onClick="gotoAddplant"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toEndOf="@+id/buttonGotoHome" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/berde"
+        android:onClick="gotoPremium"
+        app:icon="@drawable/ic_leaves"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toEndOf="@+id/button7" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

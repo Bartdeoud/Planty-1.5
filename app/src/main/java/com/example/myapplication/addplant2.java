@@ -60,13 +60,18 @@ public class addplant2 extends AppCompatActivity {
                     100);
 
         }
-        ActivityCompat.requestPermissions(addplant2.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                1);
-
-        ActivityCompat.requestPermissions(addplant2.this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                1);
+        if(ContextCompat.checkSelfPermission(addplant2.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(addplant2.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+        }
+        if(ContextCompat.checkSelfPermission(addplant2.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(addplant2.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    1);
+        }
         btOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,5 +158,22 @@ public class addplant2 extends AppCompatActivity {
     }
 
     public void makePicture(View view) {
+    }
+    public void buttonGotoHome3(View view) {
+        Intent Singinpage = new Intent(addplant2.this, Home.class);
+        startActivity(Singinpage);
+    }
+
+    public void buttonGotoWateringcycle3(View view) {
+        Intent Singinpage = new Intent(addplant2.this, WateringCycle.class);
+        startActivity(Singinpage);
+    }
+
+    public void gotoAddplant3(View view) {
+    }
+
+    public void gotoPremium3(View view) {
+        Intent Singinpage = new Intent(addplant2.this, Premium.class);
+        startActivity(Singinpage);
     }
 }

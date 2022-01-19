@@ -83,7 +83,7 @@ public class WateringCycle extends AppCompatActivity {
             if (con == null) {
 
             } else {
-                String query = "SELECT Water_Level FROM `planten water`";
+                String query = "SELECT Water_Level FROM `planten water2`";
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -118,5 +118,10 @@ public class WateringCycle extends AppCompatActivity {
     public void gotoPremium2(View view) {
         Intent Singinpage = new Intent(WateringCycle.this, Premium.class);
         startActivity(Singinpage);
+    }
+
+    public void reloadPage(View view) {
+        loadPlants();
+        loadPlantValues();
     }
 }

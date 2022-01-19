@@ -79,7 +79,12 @@ public class ChooseLocation extends AppCompatActivity {
         String plantnummerst = commitQuery(query);
         int plantnummer = Integer.parseInt(plantnummerst.substring(0, plantnummerst.length() - 2)) + 1;
         String query2 = "select PrivatePlantnummer from Plant Where Gebruikercode = '" + gebruikerCode + "' order by PrivatePlantnummer";
-        int PrivatePlantnummer = Integer.parseInt(commitQuery(query2)) + 1;
+        int PrivatePlantnummer = 1;
+        try {
+            PrivatePlantnummer = Integer.parseInt(commitQuery(query2)) + 1;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
         String query3 = "insert into Plant ([Gebruikercode], [Plantnummer], [Plantnaam], [Toevoeg_Datum], [Microbit], [Locatie], [PrivatePlantnummer]) values ('" + gebruikerCode + "', '" + plantnummer + "', '" + plantName + "', '" + date + "', '1', '" + plantLocation + "', '" + PrivatePlantnummer +"')";
         String ddd = commitQuery(query3);
         Intent mainActivityintent = new Intent(ChooseLocation.this, Home.class);

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Home extends AppCompatActivity {
+
+    public static String ip = "192.168.2.12";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class Home extends AppCompatActivity {
         textName.setText(commitQuery(query).trim() + "'s Oasis");
     }
 
-    public String[] plantNames = new String[6];
+    public static String[] plantNames = new String[6];
 
 
 
@@ -49,7 +50,7 @@ public class Home extends AppCompatActivity {
         TextView text4 = findViewById(R.id.textViewP4);
         TextView text5 = findViewById(R.id.textViewP5);
         TextView text6 = findViewById(R.id.textViewP6);
-        getPlantNames();
+        loadPlantnames();
         imageView1.setImageBitmap(loadBitmap(getFilePath(plantNames[0]).getPath()));
         text1.setText(plantNames[0]);
         if (plantNames[1] == null) return;
@@ -70,7 +71,7 @@ public class Home extends AppCompatActivity {
     }
 
     //For pushing query to sql and receiving data
-    private void getPlantNames(){
+    private void loadPlantnames(){
         Connection connect;
         String result = "";
         try {

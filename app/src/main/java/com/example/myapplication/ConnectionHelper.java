@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import static com.example.myapplication.Home.ip;
 import static java.net.InetAddress.getLocalHost;
 
 import android.annotation.SuppressLint;
@@ -19,12 +20,11 @@ import java.sql.DriverManager;
 public class ConnectionHelper
 {
     Connection con;
-    String uname, pass, ip, port, database;
+    String uname, pass, port, database, localip;
 
     public Connection Connectionclass()
     {
             //local ip adress from cmd
-            ip = "192.168.2.12";
             database = "master";
             //acces data
             uname = "sa";

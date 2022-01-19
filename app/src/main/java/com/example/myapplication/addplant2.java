@@ -81,7 +81,13 @@ public class addplant2 extends AppCompatActivity {
                     plantName = text.getText().toString();
                     //checks if plant count is higher than 6
                     String query = "select PrivatePlantnummer from Plant Where Gebruikercode = '" + gebruikerCode + "' order by PrivatePlantnummer";
-                    int Plants = Integer.parseInt(commitQuery(query));
+                    int Plants = 1;
+                    try {
+                        Plants = Integer.parseInt(commitQuery(query));
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+
                     if (!(Plants >= 6)){
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         startActivityForResult(intent, 100);

@@ -10,12 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.Arrays;
-import java.util.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
@@ -93,23 +90,21 @@ public class SignUp extends AppCompatActivity {
         if (EmailAlredyExist()){
             return false;
         }
-        if(!bedrijfExist()){
-            return false;
-        }
+        bedrijfExist();
+
         return true;
     }
 
     //checks if filled in bedijf exist & put Bedrijfcode in Bedrijfcode
-    public boolean bedrijfExist(){
+    public void bedrijfExist(){
         String query1 = "SELECT COUNT(Naam) FROM Bedrijf WHERE Naam = '" + company.getText().toString() + "';";
         String companyCount = commitQuery(query1);
         if(Integer.parseInt(companyCount) > 0){
             String query2 = "SELECT Bedrijfcode FROM Bedrijf WHERE Naam = '" + company.getText().toString() + "';";
             Bedrijfscode = commitQuery(query2);
-            return true;
+            return;
         }
-        company.setError("Could not find company");
-        return false;
+        Bedrijfscode = "1";
     }
 
     //Checks if Emal exist in database

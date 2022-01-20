@@ -76,14 +76,15 @@
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="305dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="299dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/alike_angular"
         android:text="Unlock water reminders for all your plants"
         android:textAlignment="gravity"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.651"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -160,7 +161,8 @@
         android:textAlignment="gravity"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btnMakeAccount2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

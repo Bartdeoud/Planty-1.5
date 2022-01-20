@@ -83,7 +83,7 @@ public class WateringCycle extends AppCompatActivity {
             if (con == null) {
 
             } else {
-                String query = "SELECT Water_Level FROM `planten water2`";
+                String query = "SELECT Water_Level FROM `planten_water`";
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.Home.gebruikerCode;
 import static com.example.myapplication.Home.plantNames;
 import static com.example.myapplication.addplant2.loadBitmap;
 
@@ -68,7 +69,7 @@ public class WateringCycle extends AppCompatActivity {
         //gets directory for foto's
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File file = new File(fotoDirectory, fileName + ".png");
+        File file = new File(fotoDirectory, gebruikerCode + fileName + ".png");
         return file;
     }
 

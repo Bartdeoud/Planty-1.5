@@ -16,17 +16,13 @@ public class ConnectionClass {
     String password = "Planty";
 
     public Connection CONN(){
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection conn = null;
         String ConnURL = null;
         try{
             Class.forName(classs);
             conn = DriverManager.getConnection(url, un, password);
-
-            //conn = DriverManager.getConnection(ConnURL);
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

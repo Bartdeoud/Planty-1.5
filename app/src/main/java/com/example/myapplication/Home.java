@@ -1,10 +1,10 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.LogIn.gebruikerCode;
 import static com.example.myapplication.SignUp.commitQuery;
 import static com.example.myapplication.addplant2.loadBitmap;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,8 +22,10 @@ import java.sql.Statement;
 
 public class Home extends AppCompatActivity {
 
-    public static String ip = "192.168.2.12";
+    public static String ip = "10.0.0.2";
+    public static String gebruikerCode = "1001";
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +103,7 @@ public class Home extends AppCompatActivity {
         //gets directory for foto's
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File file = new File(fotoDirectory, fileName + ".png");
+        File file = new File(fotoDirectory, gebruikerCode + fileName + ".png");
         return file;
     }
 

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import static com.example.myapplication.SignUp.commitQuery;
+import static com.example.myapplication.Home.gebruikerCode;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
     Button btLogin;
     TextView btSignin;
     public String key = "0";
-    public static String gebruikerCode = "1001";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

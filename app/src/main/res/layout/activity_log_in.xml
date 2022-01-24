@@ -32,9 +32,9 @@
 
     <EditText
         android:id="@+id/inputEmailAddress"
-        android:layout_width="353dp"
+        android:layout_width="320dp"
         android:layout_height="48dp"
-        android:layout_marginTop="324dp"
+        android:layout_marginTop="404dp"
         android:background="@drawable/input_bg"
         android:ems="10"
         android:hint="@string/email"
@@ -51,13 +51,12 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/inputPassword"
-        android:layout_width="353dp"
+        android:layout_width="320dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/input_bg"
@@ -82,7 +81,7 @@
 
     <Button
         android:id="@+id/Loginbtn"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="51dp"
         android:layout_marginBottom="40dp"
         android:backgroundTint="#FFFFFF"
@@ -120,28 +119,31 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/don_t_have_an_account"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Loginbtn" />
 
     <TextView
         android:id="@+id/signInButon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:minHeight="48dp"
         android:onClick="ButtonSignin"
         android:text="@string/sign_up"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/Loginbtn"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

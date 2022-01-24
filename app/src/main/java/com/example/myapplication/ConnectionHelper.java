@@ -24,7 +24,6 @@ public class ConnectionHelper
 
     public Connection Connectionclass()
     {
-            //local ip adress from cmd
             database = "master";
             //acces data
             uname = "sa";

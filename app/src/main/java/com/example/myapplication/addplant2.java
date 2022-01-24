@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.LogIn.gebruikerCode;
+import static com.example.myapplication.Home.gebruikerCode;
 import static com.example.myapplication.SignUp.commitQuery;
 
 import androidx.annotation.Nullable;
@@ -141,7 +141,7 @@ public class addplant2 extends AppCompatActivity {
     public void saveBitmap(Bitmap pictureBitmap) {
         try {
             //create file with path
-        File file = getFilePath(plantName);
+        File file = getFilePath(gebruikerCode + plantName);
         //generates new stream to file
             OutputStream fOut = new FileOutputStream(file);
         //saves bitmap to file

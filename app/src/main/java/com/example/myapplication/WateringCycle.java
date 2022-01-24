@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.sql.Connection;
@@ -75,13 +76,12 @@ public class WateringCycle extends AppCompatActivity {
     public void loadPlantValues(){
         ConnectionClass connectionClass;
         String result = "";
-        TextView textView;
 
         connectionClass = new ConnectionClass();
         try {
             Connection con = connectionClass.CONN();
             if (con == null) {
-
+                Toast.makeText(WateringCycle.this, "Database server is unreachable", Toast.LENGTH_SHORT).show();
             } else {
                 String query = "SELECT Water_Level FROM `planten_water`";
                 Statement stmt = con.createStatement();

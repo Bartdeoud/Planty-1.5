@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.sql.Connection;
@@ -34,8 +35,6 @@ public class Home extends AppCompatActivity {
     }
 
     public static String[] plantNames = new String[6];
-
-
 
     private void loadPlants(){
         ImageView imageView1 = findViewById(R.id.imageViewP1);
@@ -89,9 +88,12 @@ public class Home extends AppCompatActivity {
                     plantNames[i] = rs.getString(1);
                     i++;
                 }
+            } else {
+                Toast.makeText(Home.this, "Database server is unreachable", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception ex) {
-            Log.e("Error 001", ex.getMessage());
+            Log.e("Error: ", ex.getMessage());
+            Toast.makeText(Home.this, "Error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 

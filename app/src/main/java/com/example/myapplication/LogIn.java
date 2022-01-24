@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,7 +53,7 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
     }
 
     public boolean CheckLoginData() {
-        Connection connect;
+        Connection connect = null;
         boolean autenticated = false;
         EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
         EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
@@ -61,7 +62,7 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
             //connection with database
             try {
                 ConnectionHelper connectionHelper = new ConnectionHelper();
-                connect = connectionHelper.Connectionclass();
+                    connect = connectionHelper.Connectionclass();
                 if (connect != null) {
                     //query statement
                     String query = "SELECT Encription_key FROM Gebruiker WHERE Email = '" + inMailET.getText().toString() + "'";
@@ -73,8 +74,12 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                         key = rs.getString(1);
                     }
                 }
+                else{
+                    Toast.makeText(LogIn.this, "Database server is unreachable", Toast.LENGTH_SHORT).show();
+                }
             } catch (Exception ex) {
                 Log.e("Error ", ex.getMessage());
+                Toast.makeText(LogIn.this, "Error connection:" + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             //checks if passwords are the same

@@ -47,7 +47,7 @@ public class WateringCycle extends AppCompatActivity {
             if(getFilePath(plantNames[i]).exists()) {
                 circleImageViews.get(i).setImageBitmap(loadBitmap(getFilePath(plantNames[i]).getPath()));
             }
-            else {
+            else if (plantNames[i] != null){
                 allLoaded = false;
             }
             if(plantNames[i] == null){

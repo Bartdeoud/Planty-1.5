@@ -57,7 +57,7 @@ public class Home extends AppCompatActivity {
             for (int i = 0; i <= 5; i++) {
                 if (getFilePath(plantNames[i]).exists()) {
                     imageViews.get(i).setImageBitmap(loadBitmap(getFilePath(plantNames[i]).getPath()));
-                } else {
+                } else if (plantNames[i] != null){
                     allLoaded = false;
                 }
                 if (plantNames[i] == null) {
@@ -169,6 +169,12 @@ public class Home extends AppCompatActivity {
 
     public void gotoPremium(View view) {
         Intent intent = new Intent(Home.this, Premium.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+    public void userData(View view) {
+        Intent intent = new Intent(Home.this, userData.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

@@ -32,13 +32,13 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View v) {
                 Connection connect;
                 String ConnectionResult = "";
-                firstName = (EditText) findViewById(R.id.input_FirstName);
-                lastName = (EditText) findViewById(R.id.input_LastName);
-                address = (EditText) findViewById(R.id.input_Address);
-                company = (EditText) findViewById(R.id.input_Company);
-                telephone = (EditText) findViewById(R.id.input_Telephone);
-                email = (EditText) findViewById(R.id.input_Email);
-                password = (EditText) findViewById(R.id.input_Password);
+                firstName = (EditText) findViewById(R.id.textProfile1);
+                lastName = (EditText) findViewById(R.id.textProfile2);
+                address = (EditText) findViewById(R.id.textProfile3);
+                company = (EditText) findViewById(R.id.textProfile4);
+                telephone = (EditText) findViewById(R.id.textProfile5);
+                email = (EditText) findViewById(R.id.textProfile6);
+                password = (EditText) findViewById(R.id.textProfile7);
                 passwordConfirm = (EditText) findViewById(R.id.input_ConfPassword);
 
                 if(SignInValidator()){
@@ -110,7 +110,7 @@ public class SignUp extends AppCompatActivity {
 
     //Checks if Emal exist in database
     public boolean EmailAlredyExist(){
-        EditText inMailET = (EditText) findViewById(R.id.input_Email);
+        EditText inMailET = (EditText) findViewById(R.id.textProfile6);
         String Inmail = inMailET.getText().toString();
         String query = "SELECT COUNT(Email) FROM Gebruiker WHERE Email = '" + Inmail + "';";
         String CountEmails = commitQuery(query);

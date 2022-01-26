@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.SignUp.commitQuery;
+import static com.example.myapplication.outsideVariables.commitQuery;
 import static com.example.myapplication.addplant2.plantName;
 import static com.example.myapplication.outsideVariables.gebruikerCode;
 

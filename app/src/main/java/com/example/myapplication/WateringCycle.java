@@ -34,6 +34,13 @@ public class WateringCycle extends AppCompatActivity {
         loadPlants();
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPlants();
+    }
+
     private void loadPlants(){
         loadPlantValues();
         ArrayList<CircleImageView> circleImageViews = new ArrayList<>(Arrays.asList(findViewById(R.id.profile_imageP1),findViewById(R.id.profile_imageP2),findViewById(R.id.profile_imageP3),findViewById(R.id.profile_imageP4),findViewById(R.id.profile_imageP5),findViewById(R.id.profile_imageP6)));
@@ -68,31 +75,33 @@ public class WateringCycle extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void loadPlantValues(){
-        ConnectionClass connectionClass;
-        String result = "";
+        if (plantNames != null) {
+            ConnectionClass connectionClass;
+            String result = "";
 
-        connectionClass = new ConnectionClass();
-        try {
-            Connection con = connectionClass.CONN();
-            if (con == null) {
-                Toast.makeText(WateringCycle.this, "Database server is unreachable", Toast.LENGTH_SHORT).show();
-            } else {
-                String query = "SELECT Water_Level FROM `planten_water`";
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    //puts query output in string
-                    result = rs.getString(1);
+            connectionClass = new ConnectionClass();
+            try {
+                Connection con = connectionClass.CONN();
+                if (con == null) {
+                    Toast.makeText(WateringCycle.this, "Database server is unreachable", Toast.LENGTH_SHORT).show();
+                } else {
+                    String query = "SELECT Water_Level FROM `planten_water`";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    while (rs.next()) {
+                        //puts query output in string
+                        result = rs.getString(1);
+                    }
                 }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        TextView textViewPW1 = findViewById(R.id.textViewPW1);
-        if(Integer.parseInt(result) > 200){
-            textViewPW1.setText("Doesn't need water");
-        } else {
-            textViewPW1.setText("Needs water");
+            TextView textViewPW1 = findViewById(R.id.textViewPW1);
+            if (Integer.parseInt(result) > 200) {
+                textViewPW1.setText("Doesn't need water");
+            } else {
+                textViewPW1.setText("Needs water");
+            }
         }
     }
 

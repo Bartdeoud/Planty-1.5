@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.SignUp.commitQuery;
+import static com.example.myapplication.outsideVariables.commitQuery;
 import static com.example.myapplication.outsideVariables.gebruikerCode;
 
 import android.Manifest;
@@ -89,6 +89,13 @@ public class addplant2 extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EditText editText = findViewById(R.id.etGivePlantName);
+        editText.setText("");
     }
 
     public boolean CheckIFFilled(){

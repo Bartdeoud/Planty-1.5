@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static com.example.myapplication.outsideVariables.commitQuery;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,8 +16,6 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class SignUp extends AppCompatActivity {
 
@@ -116,28 +116,6 @@ public class SignUp extends AppCompatActivity {
             return true;
         }
         return false;
-    }
-
-    //For pushing query to sql and receiving data
-    public static String commitQuery(String query){
-        Connection connect;
-        String result = "";
-        try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connect = connectionHelper.Connectionclass();
-            if (connect != null) {
-                //query statement
-                Statement st = connect.createStatement();
-                ResultSet rs = st.executeQuery(query);
-                while (rs.next()) {
-                    //puts query output in string
-                    result = rs.getString(1);
-                }
-            }
-        } catch (Exception ex) {
-            Log.e("Error 001", ex.getMessage());
-        }
-        return result;
     }
 
     //checks if every box is filled in

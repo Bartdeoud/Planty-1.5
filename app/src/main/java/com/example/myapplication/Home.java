@@ -1,14 +1,16 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.SignUp.commitQuery;
+import static com.example.myapplication.outsideVariables.commitQuery;
 import static com.example.myapplication.addplant2.loadBitmap;
 import static com.example.myapplication.outsideVariables.gebruikerCode;
 import static com.example.myapplication.outsideVariables.plantNames;
+import static com.example.myapplication.userData.loadBitmapP;
 
 import android.annotation.SuppressLint;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -43,12 +45,35 @@ public class Home extends AppCompatActivity {
         TextView textName = findViewById(R.id.textViewName);
         String query = "select Voornaam from Gebruiker Where Gebruikercode = '" + gebruikerCode + "'";
         textName.setText(commitQuery(query).trim() + "'s Oasis");
+        ImageView view = findViewById(R.id.imageProfile);
+        Bitmap bitmap = loadBitmapP(getFilePathP("P" + gebruikerCode + "ProfilePicture").getPath());
+        if (bitmap != null) {
+            view.setImageBitmap(bitmap);
+        }
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPlants();
+        TextView textName = findViewById(R.id.textViewName);
+        String query = "select Voornaam from Gebruiker Where Gebruikercode = '" + gebruikerCode + "'";
+        textName.setText(commitQuery(query).trim() + "'s Oasis");
+        ImageView view = findViewById(R.id.imageProfile);
+        Bitmap bitmap = loadBitmapP(getFilePathP("P" + gebruikerCode + "ProfilePicture").getPath());
+        if (bitmap != null) {
+            view.setImageBitmap(bitmap);
+        }
+    }
 
     private void loadPlants() {
         imageViews = new ArrayList<>(Arrays.asList(findViewById(R.id.imageViewP1), findViewById(R.id.imageViewP2), findViewById(R.id.imageViewP3), findViewById(R.id.imageViewP4), findViewById(R.id.imageViewP5), findViewById(R.id.imageViewP6)));
         textViews = new ArrayList<>(Arrays.asList(findViewById(R.id.textViewP1), findViewById(R.id.textViewP2), findViewById(R.id.textViewP3), findViewById(R.id.textViewP4), findViewById(R.id.textViewP5), findViewById(R.id.textViewP6)));
+
+        for (TextView textView: textViews){
+            textView.setText("");
+        }
 
         loadPlantnames();
         if (!(plantNames[0] == null)) {
@@ -126,6 +151,12 @@ public class Home extends AppCompatActivity {
         }
     };
 
+    private File getFilePathP(String fileName){
+        //gets directory for foto's
+        ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
+        File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        return new File(fotoDirectory, fileName + ".png");
+    }
 
     public void removePlant(View view) {
         //creates pop up message yes/no

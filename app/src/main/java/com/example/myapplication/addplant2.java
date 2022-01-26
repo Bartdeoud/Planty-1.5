@@ -166,20 +166,23 @@ public class addplant2 extends AppCompatActivity {
     public void makePicture(View view) {
     }
     public void buttonGotoHome3(View view) {
-        Intent Singinpage = new Intent(addplant2.this, Home.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(addplant2.this, Home.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     public void buttonGotoWateringcycle3(View view) {
-        Intent Singinpage = new Intent(addplant2.this, WateringCycle.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(addplant2.this, WateringCycle.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     public void gotoAddplant3(View view) {
     }
 
     public void gotoPremium3(View view) {
-        Intent Singinpage = new Intent(addplant2.this, Premium.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(addplant2.this, Premium.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 }

@@ -86,7 +86,7 @@ public class ChooseLocation extends AppCompatActivity {
             e.printStackTrace();
         }
         String query3 = "insert into Plant ([Gebruikercode], [Plantnummer], [Plantnaam], [Toevoeg_Datum], [Microbit], [Locatie], [PrivatePlantnummer]) values ('" + gebruikerCode + "', '" + plantnummer + "', '" + plantName + "', '" + date + "', '1', '" + plantLocation + "', '" + PrivatePlantnummer +"')";
-        String ddd = commitQuery(query3);
+        commitQuery(query3);
         Intent mainActivityintent = new Intent(ChooseLocation.this, Home.class);
         startActivity(mainActivityintent);
     }

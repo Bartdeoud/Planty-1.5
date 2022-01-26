@@ -2,11 +2,15 @@ package com.example.myapplication;
 
 import static com.example.myapplication.SignUp.commitQuery;
 import static com.example.myapplication.addplant2.loadBitmap;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -19,11 +23,17 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Home extends AppCompatActivity {
 
-    public static String ip = "10.0.0.2";
-    public static String gebruikerCode = "1001";
+    public static String ip = "10.0.0.2", gebruikerCode = "1001";
+    public static String[] plantNames = new String[6];
+    private String plantToRemove = "";
+    private int dialogInterface = 0, timesHomeLoaded = 0;
+    private ArrayList<ImageView> imageViews = new ArrayList<>();
+    private ArrayList<TextView> textViews = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -36,43 +46,44 @@ public class Home extends AppCompatActivity {
         textName.setText(commitQuery(query).trim() + "'s Oasis");
     }
 
-    public static String[] plantNames = new String[6];
 
-    private void loadPlants(){
-        ImageView imageView1 = findViewById(R.id.imageViewP1);
-        ImageView imageView2 = findViewById(R.id.imageViewP2);
-        ImageView imageView3 = findViewById(R.id.imageViewP3);
-        ImageView imageView4 = findViewById(R.id.imageViewP4);
-        ImageView imageView5 = findViewById(R.id.imageViewP5);
-        ImageView imageView6 = findViewById(R.id.imageViewP6);
-        TextView text1 = findViewById(R.id.textViewP1);
-        TextView text2 = findViewById(R.id.textViewP2);
-        TextView text3 = findViewById(R.id.textViewP3);
-        TextView text4 = findViewById(R.id.textViewP4);
-        TextView text5 = findViewById(R.id.textViewP5);
-        TextView text6 = findViewById(R.id.textViewP6);
+    private void loadPlants() {
+        imageViews = new ArrayList<>(Arrays.asList(findViewById(R.id.imageViewP1), findViewById(R.id.imageViewP2), findViewById(R.id.imageViewP3), findViewById(R.id.imageViewP4), findViewById(R.id.imageViewP5), findViewById(R.id.imageViewP6)));
+        textViews = new ArrayList<>(Arrays.asList(findViewById(R.id.textViewP1), findViewById(R.id.textViewP2), findViewById(R.id.textViewP3), findViewById(R.id.textViewP4), findViewById(R.id.textViewP5), findViewById(R.id.textViewP6)));
+
         loadPlantnames();
-        imageView1.setImageBitmap(loadBitmap(getFilePath(plantNames[0]).getPath()));
-        text1.setText(plantNames[0]);
-        if (plantNames[1] == null) return;
-        imageView2.setImageBitmap(loadBitmap(getFilePath(plantNames[1]).getPath()));
-        text2.setText(plantNames[1]);
-        if (plantNames[2] == null) return;
-        imageView3.setImageBitmap(loadBitmap(getFilePath(plantNames[2]).getPath()));
-        text3.setText(plantNames[2]);
-        if (plantNames[3] == null) return;
-        imageView4.setImageBitmap(loadBitmap(getFilePath(plantNames[3]).getPath()));
-        text4.setText(plantNames[3]);
-        if (plantNames[4] == null) return;
-        imageView5.setImageBitmap(loadBitmap(getFilePath(plantNames[4]).getPath()));
-        text5.setText(plantNames[4]);
-        if (plantNames[5] == null) return;
-        imageView6.setImageBitmap(loadBitmap(getFilePath(plantNames[5]).getPath()));
-        text6.setText(plantNames[5]);
+        if (!(plantNames[0] == null)) {
+            boolean allLoaded = true;
+            for (int i = 0; i <= 5; i++) {
+                if (getFilePath(plantNames[i]).exists()) {
+                    imageViews.get(i).setImageBitmap(loadBitmap(getFilePath(plantNames[i]).getPath()));
+                } else {
+                    allLoaded = false;
+                }
+                if (plantNames[i] == null) {
+                    imageViews.get(i).setImageBitmap(null);
+                }
+                textViews.get(i).setText(plantNames[i]);
+            }
+            if (!allLoaded) {
+                Toast.makeText(Home.this, "Could not load all images", Toast.LENGTH_SHORT).show();
+            }
+        } else if (!(timesHomeLoaded >= 1)) {
+            //makes sure it is only asked one time
+            timesHomeLoaded++;
+            //creates pop up message yes/no
+            dialogInterface = 1;
+            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+            builder.setMessage("You do not have any plants stored.\nDo you want to add a plant?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+            for (ImageView imageView : imageViews) {
+                imageView.setImageBitmap(null);
+            }
+        }
     }
 
     //For pushing query to sql and receiving data
-    private void loadPlantnames(){
+    private void loadPlantnames() {
+        Arrays.fill(plantNames, null);
         Connection connect;
         String result = "";
         try {
@@ -99,7 +110,41 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    private File getFilePath(String fileName){
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            if (dialogInterface == 0) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        String query = "delete from Plant where Gebruikercode = '" + gebruikerCode + "' and Plantnaam = '" + plantToRemove + "'";
+                        commitQuery(query);
+                        File file = getFilePath(gebruikerCode + plantToRemove);
+                        file.delete();
+                        loadPlants();
+                }
+            } else {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent intent = new Intent(Home.this, addplant2.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                        startActivity(intent);
+                }
+            }
+        }
+    };
+
+
+    public void removePlant(View view) {
+        //creates pop up message yes/no
+        dialogInterface = 0;
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        builder.setMessage("Delete plant?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+        //saves the name of plant to remove
+        plantToRemove = textViews.get(imageViews.indexOf(view)).getText().toString();
+    }
+
+    private File getFilePath(String fileName) {
         //gets directory for foto's
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -111,17 +156,20 @@ public class Home extends AppCompatActivity {
     }
 
     public void buttonGotoWateringcycle(View view) {
-        Intent Singinpage = new Intent(Home.this, WateringCycle.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(Home.this, WateringCycle.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     public void gotoAddplant(View view) {
-        Intent Singinpage = new Intent(Home.this, addplant2.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(Home.this, addplant2.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     public void gotoPremium(View view) {
-        Intent Singinpage = new Intent(Home.this, Premium.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(Home.this, Premium.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 }

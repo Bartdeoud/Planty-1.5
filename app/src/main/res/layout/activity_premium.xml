@@ -11,58 +11,60 @@
         android:id="@+id/button12"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@color/berde"
         android:onClick="gotoPremium4"
         app:icon="@drawable/ic_leaves"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button11"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toEndOf="@+id/button11" />
 
     <Button
         android:id="@+id/button11"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="40dp"
         android:backgroundTint="@color/berde"
         android:onClick="gotoAddplant4"
         app:icon="@drawable/ic_add"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button10"
-        app:layout_constraintStart_toEndOf="@+id/button10" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.643"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button10"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="36dp"
         android:backgroundTint="@color/berde"
         android:onClick="buttonGotoWateringcycle4"
         app:icon="@drawable/ic_water"
         app:iconGravity="textEnd"
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome4"
-        app:layout_constraintStart_toEndOf="@+id/buttonGotoHome4" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.358"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonGotoHome4"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/berde"
         android:onClick="buttonGotoHome4"
         app:icon="@drawable/ic_home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973" />
+        app:layout_constraintEnd_toStartOf="@+id/button10"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -95,6 +97,7 @@
         android:layout_marginBottom="140dp"
         android:backgroundTint="#0C400D"
         android:text=" Lifetime €49.99 (Most Value)"
+        android:onClick="PremiumService"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="#FFFFFF"
@@ -108,6 +111,7 @@
         android:layout_height="49dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="#0C400D"
+        android:onClick="PremiumService"
         android:text="Monthly €6.99 (Most Flexible)"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -123,6 +127,7 @@
         android:layout_marginBottom="28dp"
         android:backgroundTint="#0C400D"
         android:text=" Annual €29.99 (Most Popular)"
+        android:onClick="PremiumService"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="#FFFFFF"

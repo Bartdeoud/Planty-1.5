@@ -63,8 +63,9 @@ public class SignUp extends AppCompatActivity {
                     } catch (Exception ex) {
                         Log.e("Error ", ex.getMessage());
                     }
-                    Intent loginpage = new Intent(SignUp.this, LogIn.class);
-                    startActivity(loginpage);
+                    Intent intent = new Intent(SignUp.this, LogIn.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
                 }
             }
         });

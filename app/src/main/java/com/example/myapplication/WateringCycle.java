@@ -3,12 +3,14 @@ package com.example.myapplication;
 import static com.example.myapplication.Home.gebruikerCode;
 import static com.example.myapplication.Home.plantNames;
 import static com.example.myapplication.addplant2.loadBitmap;
+import static com.example.myapplication.addplant2.plantName;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -20,6 +22,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,39 +34,31 @@ public class WateringCycle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watering_cycle);
         loadPlants();
-        loadPlantValues();
     }
 
     private void loadPlants(){
-        CircleImageView circleImageViewP1 = findViewById(R.id.profile_imageP1);
-        CircleImageView circleImageViewP2 = findViewById(R.id.profile_imageP2);
-        CircleImageView circleImageViewP3 = findViewById(R.id.profile_imageP3);
-        CircleImageView circleImageViewP4 = findViewById(R.id.profile_imageP4);
-        CircleImageView circleImageViewP5 = findViewById(R.id.profile_imageP5);
-        CircleImageView circleImageViewP6 = findViewById(R.id.profile_imageP6);
-        TextView textViewP21 = findViewById(R.id.textViewP21);
-        TextView textViewP22 = findViewById(R.id.textViewP22);
-        TextView textViewP23 = findViewById(R.id.textViewP23);
-        TextView textViewP24 = findViewById(R.id.textViewP24);
-        TextView textViewP25 = findViewById(R.id.textViewP25);
-        TextView textViewP26 = findViewById(R.id.textViewP26);
-        circleImageViewP1.setImageBitmap(loadBitmap(getFilePath(plantNames[0]).getPath()));
-        textViewP21.setText(plantNames[0]);
-        if (plantNames[1] == null) return;
-        circleImageViewP2.setImageBitmap(loadBitmap(getFilePath(plantNames[1]).getPath()));
-        textViewP22.setText(plantNames[1]);
-        if (plantNames[2] == null) return;
-        circleImageViewP3.setImageBitmap(loadBitmap(getFilePath(plantNames[2]).getPath()));
-        textViewP23.setText(plantNames[2]);
-        if (plantNames[3] == null) return;
-        circleImageViewP4.setImageBitmap(loadBitmap(getFilePath(plantNames[3]).getPath()));
-        textViewP24.setText(plantNames[3]);
-        if (plantNames[4] == null) return;
-        circleImageViewP5.setImageBitmap(loadBitmap(getFilePath(plantNames[4]).getPath()));
-        textViewP25.setText(plantNames[4]);
-        if (plantNames[5] == null) return;
-        circleImageViewP6.setImageBitmap(loadBitmap(getFilePath(plantNames[5]).getPath()));
-        textViewP26.setText(plantNames[5]);
+        loadPlantValues();
+        ArrayList<CircleImageView> circleImageViews = new ArrayList<>(Arrays.asList(findViewById(R.id.profile_imageP1),findViewById(R.id.profile_imageP2),findViewById(R.id.profile_imageP3),findViewById(R.id.profile_imageP4),findViewById(R.id.profile_imageP5),findViewById(R.id.profile_imageP6)));
+        ArrayList<TextView> textViews = new ArrayList<>(Arrays.asList(findViewById(R.id.textViewP21),findViewById(R.id.textViewP22),findViewById(R.id.textViewP23),findViewById(R.id.textViewP24),findViewById(R.id.textViewP25),findViewById(R.id.textViewP26)));
+        ArrayList<TextView> textViews1 = new ArrayList<>(Arrays.asList(findViewById(R.id.textViewPW1),findViewById(R.id.textViewPW2),findViewById(R.id.textViewPW3),findViewById(R.id.textViewPW4),findViewById(R.id.textViewPW5),findViewById(R.id.textViewPW6)));
+
+        boolean allLoaded = true;
+        for(int i = 0; i <= 5; i++){
+            if(getFilePath(plantNames[i]).exists()) {
+                circleImageViews.get(i).setImageBitmap(loadBitmap(getFilePath(plantNames[i]).getPath()));
+            }
+            else {
+                allLoaded = false;
+            }
+            if(plantNames[i] == null){
+                circleImageViews.get(i).setImageBitmap(null);
+                textViews1.get(i).setText("");
+            }
+            textViews.get(i).setText(plantNames[i]);
+        }
+        if(!allLoaded){
+            Toast.makeText(WateringCycle.this, "Could not load all images", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private File getFilePath(String fileName){
@@ -104,25 +100,28 @@ public class WateringCycle extends AppCompatActivity {
     }
 
     public void buttonGotoHome2(View view) {
-        Intent Singinpage = new Intent(WateringCycle.this, Home.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(WateringCycle.this, Home.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     public void buttonGotoWateringcycle2(View view) {
     }
 
     public void gotoAddplant2(View view) {
-        Intent Singinpage = new Intent(WateringCycle.this, addplant2.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(WateringCycle.this, addplant2.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     public void gotoPremium2(View view) {
-        Intent Singinpage = new Intent(WateringCycle.this, Premium.class);
-        startActivity(Singinpage);
+        Intent intent = new Intent(WateringCycle.this, Premium.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
     public void reloadPage(View view) {
-        loadPlants();
         loadPlantValues();
+        Toast.makeText(WateringCycle.this, "Realoding data", Toast.LENGTH_SHORT).show();
     }
 }

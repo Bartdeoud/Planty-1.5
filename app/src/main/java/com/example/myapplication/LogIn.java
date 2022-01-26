@@ -36,8 +36,9 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
         btSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Singinpage = new Intent(LogIn.this, SignUp.class);
-                startActivity(Singinpage);
+                Intent intent = new Intent(LogIn.this, SignUp.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         });
 
@@ -45,8 +46,10 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (CheckLoginData()) {
-                    Intent Singinpage = new Intent(LogIn.this, Home.class);
-                    startActivity(Singinpage);
+
+                    Intent intent = new Intent(LogIn.this, Home.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
                 }
             }
         });
@@ -90,6 +93,10 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                 gebruikerCode = GebruikercodeTP.substring(0, GebruikercodeTP.length() - 2);
 
             }
+            if(autenticated) {
+                inMailET.setText("");
+                inPasswordET.setText("");
+            }
         }
         return autenticated;
     }
@@ -113,6 +120,7 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
                     return true;
                 }
                 else{
+                    password2.setText("");
                     password2.setError("Password incorrect");
                 }
             }

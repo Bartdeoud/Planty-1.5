@@ -62,7 +62,8 @@
         android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:srcCompat="@android:drawable/stat_notify_error" />
 
     <ImageView
         android:id="@+id/imageViewP5"
@@ -71,7 +72,8 @@
         android:layout_marginTop="244dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:srcCompat="@android:drawable/stat_notify_error" />
 
     <TextView
         android:id="@+id/textViewP1"
@@ -124,7 +126,8 @@
         android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewP2"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:srcCompat="@android:drawable/stat_notify_error" />
 
     <ImageView
         android:id="@+id/imageViewP6"
@@ -133,7 +136,8 @@
         android:layout_marginTop="244dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewP5"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:srcCompat="@android:drawable/stat_notify_error" />
 
     <TextView
         android:id="@+id/textViewP3"
@@ -163,9 +167,11 @@
         android:layout_width="92dp"
         android:layout_height="92dp"
         android:layout_marginTop="72dp"
+        android:onClick="removePlant"
         app:layout_constraintEnd_toStartOf="@+id/imageViewP2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:srcCompat="@android:drawable/stat_notify_error" />
 
     <ImageView
         android:id="@+id/imageViewP4"
@@ -174,42 +180,41 @@
         android:layout_marginTop="244dp"
         app:layout_constraintEnd_toStartOf="@+id/imageViewP5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:srcCompat="@android:drawable/stat_notify_error" />
 
     <Button
         android:id="@+id/buttonGotoHome"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/berde"
         android:onClick="buttonGotoHome"
         app:icon="@drawable/ic_home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973" />
+        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="20dp"
         android:backgroundTint="@color/berde"
         android:onClick="buttonGotoWateringcycle"
         app:icon="@drawable/ic_water"
         app:iconGravity="textEnd"
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
-        app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toEndOf="@+id/buttonGotoHome" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.358"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="20dp"
         android:backgroundTint="@color/berde"
         android:onClick="gotoAddplant"
         app:icon="@drawable/ic_add"
@@ -218,13 +223,14 @@
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toEndOf="@+id/buttonGotoHome" />
+        app:layout_constraintHorizontal_bias="0.643"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@color/berde"
         android:onClick="gotoPremium"
         app:icon="@drawable/ic_leaves"
@@ -233,7 +239,7 @@
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonGotoHome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toEndOf="@+id/button7" />
 
 

@@ -70,5 +70,6 @@ public class ChooseLocation extends AppCompatActivity {
         commitQuery(query3);
         Intent mainActivityintent = new Intent(ChooseLocation.this, Home.class);
         startActivity(mainActivityintent);
+        finish();
     }
 }

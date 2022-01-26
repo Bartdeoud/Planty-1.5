@@ -57,6 +57,7 @@
         app:layout_constraintVertical_bias="0.323" />
 
     <ImageView
+        android:onClick="removePlant"
         android:id="@+id/imageViewP2"
         android:layout_width="92dp"
         android:layout_height="92dp"
@@ -67,6 +68,7 @@
         app:srcCompat="@android:drawable/stat_notify_error" />
 
     <ImageView
+        android:onClick="removePlant"
         android:id="@+id/imageViewP5"
         android:layout_width="92dp"
         android:layout_height="92dp"
@@ -121,6 +123,7 @@
         app:layout_constraintVertical_bias="0.178" />
 
     <ImageView
+        android:onClick="removePlant"
         android:id="@+id/imageViewP3"
         android:layout_width="92dp"
         android:layout_height="92dp"
@@ -131,6 +134,7 @@
         app:srcCompat="@android:drawable/stat_notify_error" />
 
     <ImageView
+        android:onClick="removePlant"
         android:id="@+id/imageViewP6"
         android:layout_width="92dp"
         android:layout_height="92dp"
@@ -175,6 +179,7 @@
         app:srcCompat="@android:drawable/stat_notify_error" />
 
     <ImageView
+        android:onClick="removePlant"
         android:id="@+id/imageViewP4"
         android:layout_width="92dp"
         android:layout_height="92dp"

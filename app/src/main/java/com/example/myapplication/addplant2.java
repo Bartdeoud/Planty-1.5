@@ -1,13 +1,7 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.Home.gebruikerCode;
 import static com.example.myapplication.SignUp.commitQuery;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import static com.example.myapplication.outsideVariables.gebruikerCode;
 
 import android.Manifest;
 import android.content.ContextWrapper;
@@ -23,18 +17,18 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Date;
 
 public class addplant2 extends AppCompatActivity {
 
@@ -72,36 +66,33 @@ public class addplant2 extends AppCompatActivity {
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     1);
         }
-        btOpen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(CheckIFFilled()) {
-                    //saves plant name
-                    TextView text = findViewById(R.id.etGivePlantName);
-                    plantName = text.getText().toString();
-                    //checks if plant count is higher than 6
-                    String query = "select PrivatePlantnummer from Plant Where Gebruikercode = '" + gebruikerCode + "' order by PrivatePlantnummer";
-                    int Plants = 1;
-                    try {
-                        Plants = Integer.parseInt(commitQuery(query));
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-
-                    if (!(Plants >= 6)){
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent, 100);
-                    } else{
-                        text.setError("You have reached the limit of plants that you can store");
-                    }
-
+        btOpen.setOnClickListener(v -> {
+            if(CheckIFFilled()) {
+                //saves plant name
+                TextView text = findViewById(R.id.etGivePlantName);
+                plantName = text.getText().toString();
+                //checks if plant count is higher than 6
+                String query = "select PrivatePlantnummer from Plant Where Gebruikercode = '" + gebruikerCode + "' order by PrivatePlantnummer";
+                int Plants = 1;
+                try {
+                    Plants = Integer.parseInt(commitQuery(query));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
+
+                if (!(Plants >= 6)){
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, 100);
+                } else{
+                    text.setError("You have reached the limit of plants that you can store");
+                }
+
             }
         });
     }
 
     public boolean CheckIFFilled(){
-        EditText name = (EditText) findViewById(R.id.etGivePlantName);
+        EditText name = findViewById(R.id.etGivePlantName);
         if(TextUtils.isEmpty(name.getText())){
            name.setError("Empty");
            return false;
@@ -115,8 +106,7 @@ public class addplant2 extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             //Get capture image
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
-            imagePlant = captureImage;
+            imagePlant = (Bitmap) data.getExtras().get("data");
             saveBitmap(imagePlant);
             Intent mainActivityintent = new Intent(addplant2.this, ChooseLocation.class);
             startActivity(mainActivityintent);
@@ -131,8 +121,7 @@ public class addplant2 extends AppCompatActivity {
                 return null;
             }
             //gets bitmap from foto
-            Bitmap bitmap = BitmapFactory.decodeFile(filename);
-            return bitmap;
+            return BitmapFactory.decodeFile(filename);
         } catch (Exception e) {
             return null;
         }
@@ -146,7 +135,7 @@ public class addplant2 extends AppCompatActivity {
             OutputStream fOut = new FileOutputStream(file);
         //saves bitmap to file
         pictureBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-        fOut.flush(); // does not do much just to be safe
+        fOut.flush(); // does not do much. just to be safe
         fOut.close(); // close the stream to file
         //safes photo to media file
         MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
@@ -159,12 +148,12 @@ public class addplant2 extends AppCompatActivity {
         //gets directory for foto's
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File file = new File(fotoDirectory, fileName + ".png");
-        return file;
+        return new File(fotoDirectory, fileName + ".png");
     }
 
     public void makePicture(View view) {
     }
+
     public void buttonGotoHome3(View view) {
         Intent intent = new Intent(addplant2.this, Home.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

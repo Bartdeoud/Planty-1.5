@@ -18,21 +18,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:screenOrientation="portrait"
             android:name=".userData"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Premium"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".WateringCycle"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".addplant2"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".SignUp"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".LogIn"
             android:exported="true">
             <intent-filter>
@@ -42,12 +48,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".ChooseLocation"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:exported="true" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Home"
             android:exported="true" />
 

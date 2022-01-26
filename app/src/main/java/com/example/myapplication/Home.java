@@ -2,15 +2,13 @@ package com.example.myapplication;
 
 import static com.example.myapplication.SignUp.commitQuery;
 import static com.example.myapplication.addplant2.loadBitmap;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.myapplication.outsideVariables.gebruikerCode;
+import static com.example.myapplication.outsideVariables.plantNames;
 
 import android.annotation.SuppressLint;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -18,6 +16,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.sql.Connection;
@@ -28,8 +29,6 @@ import java.util.Arrays;
 
 public class Home extends AppCompatActivity {
 
-    public static String ip = "10.0.0.2", gebruikerCode = "1001";
-    public static String[] plantNames = new String[6];
     private String plantToRemove = "";
     private int dialogInterface = 0, timesHomeLoaded = 0;
     private ArrayList<ImageView> imageViews = new ArrayList<>();
@@ -85,7 +84,6 @@ public class Home extends AppCompatActivity {
     private void loadPlantnames() {
         Arrays.fill(plantNames, null);
         Connection connect;
-        String result = "";
         try {
             ConnectionHelper connectionHelper = new ConnectionHelper();
             connect = connectionHelper.Connectionclass();
@@ -110,26 +108,20 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            if (dialogInterface == 0) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        //Yes button clicked
-                        String query = "delete from Plant where Gebruikercode = '" + gebruikerCode + "' and Plantnaam = '" + plantToRemove + "'";
-                        commitQuery(query);
-                        File file = getFilePath(gebruikerCode + plantToRemove);
-                        file.delete();
-                        loadPlants();
-                }
-            } else {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Intent intent = new Intent(Home.this, addplant2.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivity(intent);
-                }
+    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+        if (dialogInterface == 0) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {//Yes button clicked
+                String query = "delete from Plant where Gebruikercode = '" + gebruikerCode + "' and Plantnaam = '" + plantToRemove + "'";
+                commitQuery(query);
+                File file = getFilePath(gebruikerCode + plantToRemove);
+                file.delete();
+                loadPlants();
+            }
+        } else {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                Intent intent = new Intent(Home.this, addplant2.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         }
     };
@@ -148,8 +140,7 @@ public class Home extends AppCompatActivity {
         //gets directory for foto's
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File file = new File(fotoDirectory, gebruikerCode + fileName + ".png");
-        return file;
+        return new File(fotoDirectory, gebruikerCode + fileName + ".png");
     }
 
     public void buttonGotoHome(View view) {
@@ -158,6 +149,7 @@ public class Home extends AppCompatActivity {
     public void buttonGotoWateringcycle(View view) {
         Intent intent = new Intent(Home.this, WateringCycle.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.putExtra("Load", "true");
         startActivity(intent);
     }
 

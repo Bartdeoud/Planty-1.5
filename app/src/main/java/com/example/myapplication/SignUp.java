@@ -1,20 +1,21 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 public class SignUp extends AppCompatActivity {
 
@@ -27,46 +28,43 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         final Button button = findViewById(R.id.btnMakeAccount);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Connection connect;
-                String ConnectionResult = "";
-                firstName = (EditText) findViewById(R.id.textProfile1);
-                lastName = (EditText) findViewById(R.id.textProfile2);
-                address = (EditText) findViewById(R.id.textProfile3);
-                company = (EditText) findViewById(R.id.textProfile4);
-                telephone = (EditText) findViewById(R.id.textProfile5);
-                email = (EditText) findViewById(R.id.textProfile6);
-                password = (EditText) findViewById(R.id.textProfile7);
-                passwordConfirm = (EditText) findViewById(R.id.input_ConfPassword);
+        button.setOnClickListener(v -> {
+            Connection connect;
+            firstName =  findViewById(R.id.textProfile1);
+            lastName =  findViewById(R.id.textProfile2);
+            address =  findViewById(R.id.textProfile3);
+            company =  findViewById(R.id.textProfile4);
+            telephone =  findViewById(R.id.textProfile5);
+            email =  findViewById(R.id.textProfile6);
+            password =  findViewById(R.id.textProfile7);
+            passwordConfirm =  findViewById(R.id.input_ConfPassword);
 
-                if(SignInValidator()){
-                    int Gebruikersnummer = 0;
-                    String query1 = "SELECT Gebruikercode FROM Gebruiker ORDER BY Gebruikercode";
-                    String Gebruikerscode = commitQuery(query1);
-                    Gebruikersnummer = Integer.parseInt(Gebruikerscode.substring(0, Gebruikerscode.length() - 2)) + 1;
-                //not using commitQuery() becous INSERT
-                    try {
-                        ConnectionHelper connectionHelper = new ConnectionHelper();
-                        connect = connectionHelper.Connectionclass();
-                        if (connect != null) {
-                            //query statement
-                            Connection con = connectionHelper.Connectionclass();
-                            String query2 = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Bedrijf, Adres, Encription_key) VALUES ('" + Gebruikersnummer + "', '" + firstName.getText() + "', '" + lastName.getText() + "', '" + telephone.getText() + "', '" + email.getText() + "', '" + Bedrijfscode + "', '" + address.getText() + "', '" + GetEnqKey() +"')";
-                            System.out.println(query2);
-                            PreparedStatement prepsInsertProduct = con.prepareStatement(query2);
-                            prepsInsertProduct.execute();
-                        } else {
-                            ConnectionResult = "Check Connection";
-                        }
-                    } catch (Exception ex) {
-                        Log.e("Error ", ex.getMessage());
+            if(SignInValidator()){
+                int Gebruikersnummer;
+                String query1 = "SELECT Gebruikercode FROM Gebruiker ORDER BY Gebruikercode";
+                String Gebruikerscode = commitQuery(query1);
+                Gebruikersnummer = Integer.parseInt(Gebruikerscode.substring(0, Gebruikerscode.length() - 2)) + 1;
+            //not using commitQuery() becous INSERT
+                try {
+                    ConnectionHelper connectionHelper = new ConnectionHelper();
+                    connect = connectionHelper.Connectionclass();
+                    if (connect != null) {
+                        //query statement
+                        Connection con = connectionHelper.Connectionclass();
+                        String query2 = "INSERT INTO Gebruiker (Gebruikercode, Voornaam, Achternaam, Telefoonnummer, Email, Bedrijf, Adres, Encription_key) VALUES ('" + Gebruikersnummer + "', '" + firstName.getText() + "', '" + lastName.getText() + "', '" + telephone.getText() + "', '" + email.getText() + "', '" + Bedrijfscode + "', '" + address.getText() + "', '" + GetEnqKey() +"')";
+                        System.out.println(query2);
+                        PreparedStatement prepsInsertProduct = con.prepareStatement(query2);
+                        prepsInsertProduct.execute();
+                    } else {
+                        Toast.makeText(SignUp.this, "Could not connect with database", Toast.LENGTH_SHORT).show();
                     }
-                    Intent intent = new Intent(SignUp.this, LogIn.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(intent);
+                } catch (Exception ex) {
+                    Log.e("Error ", ex.getMessage());
+                    Toast.makeText(SignUp.this, "Error " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+                Intent intent = new Intent(SignUp.this, LogIn.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         });
     }
@@ -79,8 +77,7 @@ public class SignUp extends AppCompatActivity {
 
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword(email);
-        String encrypted = encryptor.encrypt(password);
-        return encrypted;
+        return encryptor.encrypt(password);
     }
 
     //Main validator
@@ -110,7 +107,7 @@ public class SignUp extends AppCompatActivity {
 
     //Checks if Emal exist in database
     public boolean EmailAlredyExist(){
-        EditText inMailET = (EditText) findViewById(R.id.textProfile6);
+        EditText inMailET = findViewById(R.id.textProfile6);
         String Inmail = inMailET.getText().toString();
         String query = "SELECT COUNT(Email) FROM Gebruiker WHERE Email = '" + Inmail + "';";
         String CountEmails = commitQuery(query);

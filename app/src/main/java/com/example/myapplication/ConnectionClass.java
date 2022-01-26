@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.Home.ip;
+import static com.example.myapplication.outsideVariables.ip;
 
 import android.os.StrictMode;
 
@@ -19,7 +19,6 @@ public class ConnectionClass {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection conn = null;
-        String ConnURL = null;
         try{
             Class.forName(classs);
             conn = DriverManager.getConnection(url, un, password);

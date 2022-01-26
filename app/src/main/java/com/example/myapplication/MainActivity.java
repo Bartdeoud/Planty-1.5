@@ -1,14 +1,8 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-
-
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,12 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         //set click listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                return false;
-            }
-        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> false);
     }
 }

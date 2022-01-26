@@ -1,19 +1,11 @@
 package com.example.myapplication;
 
 
-import static com.example.myapplication.Home.ip;
-import static java.net.InetAddress.getLocalHost;
+import static com.example.myapplication.outsideVariables.ip;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-
-import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -34,7 +26,7 @@ public class ConnectionHelper
             StrictMode.setThreadPolicy(policy);
 
             con = null;
-            String ConnectionURL = null;
+            String ConnectionURL;
 
             try {
                 Class.forName("net.sourceforge.jtds.jdbc.Driver");

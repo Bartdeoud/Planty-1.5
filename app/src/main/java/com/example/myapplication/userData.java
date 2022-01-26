@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.Home.gebruikerCode;
 import static com.example.myapplication.SignUp.commitQuery;
+import static com.example.myapplication.outsideVariables.gebruikerCode;
 
 import androidx.appcompat.app.AppCompatActivity;
 

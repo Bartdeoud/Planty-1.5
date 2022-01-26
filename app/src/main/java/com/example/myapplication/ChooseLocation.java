@@ -1,15 +1,14 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.Home.gebruikerCode;
 import static com.example.myapplication.SignUp.commitQuery;
 import static com.example.myapplication.addplant2.plantName;
-
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.myapplication.outsideVariables.gebruikerCode;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Date;
 
@@ -23,52 +22,34 @@ public class ChooseLocation extends AppCompatActivity {
         setContentView(R.layout.activity_choose_location);
 
         final ImageButton button = findViewById(R.id.ibLivingRoom);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plantLocation = "LivingRoom";
-                goToNextScreen();
-            }
+        button.setOnClickListener(v -> {
+            plantLocation = "LivingRoom";
+            goToNextScreen();
         });
         final ImageButton button2 = findViewById(R.id.ibPatio);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plantLocation = "Patio";
-                goToNextScreen();
-            }
+        button2.setOnClickListener(v -> {
+            plantLocation = "Patio";
+            goToNextScreen();
         });
         final ImageButton button3 = findViewById(R.id.ibOffice);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plantLocation = "Office";
-                goToNextScreen();
-            }
+        button3.setOnClickListener(v -> {
+            plantLocation = "Office";
+            goToNextScreen();
         });
         final ImageButton button4 = findViewById(R.id.ibBedroom);
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plantLocation = "Bedroom";
-                goToNextScreen();
-            }
+        button4.setOnClickListener(v -> {
+            plantLocation = "Bedroom";
+            goToNextScreen();
         });
         final ImageButton button5 = findViewById(R.id.ibKitchen);
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plantLocation = "Kitchen";
-                goToNextScreen();
-            }
+        button5.setOnClickListener(v -> {
+            plantLocation = "Kitchen";
+            goToNextScreen();
         });
         final ImageButton button6 = findViewById(R.id.ibBalcony);
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plantLocation = "Balcony";
-                goToNextScreen();
-            }
+        button6.setOnClickListener(v -> {
+            plantLocation = "Balcony";
+            goToNextScreen();
         });
     }
 

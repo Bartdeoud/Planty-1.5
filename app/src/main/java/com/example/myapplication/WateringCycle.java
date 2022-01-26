@@ -1,21 +1,19 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.Home.gebruikerCode;
-import static com.example.myapplication.Home.plantNames;
 import static com.example.myapplication.addplant2.loadBitmap;
-import static com.example.myapplication.addplant2.plantName;
-
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.myapplication.outsideVariables.gebruikerCode;
+import static com.example.myapplication.outsideVariables.plantNames;
 
 import android.annotation.SuppressLint;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.sql.Connection;
@@ -65,8 +63,7 @@ public class WateringCycle extends AppCompatActivity {
         //gets directory for foto's
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File fotoDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File file = new File(fotoDirectory, gebruikerCode + fileName + ".png");
-        return file;
+        return new File(fotoDirectory, gebruikerCode + fileName + ".png");
     }
 
     @SuppressLint("SetTextI18n")

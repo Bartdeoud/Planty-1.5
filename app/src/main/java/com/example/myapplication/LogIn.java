@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
 import static com.example.myapplication.SignUp.commitQuery;
-import static com.example.myapplication.Home.gebruikerCode;
+import static com.example.myapplication.outsideVariables.gebruikerCode;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
-public class LogIn<inPasswordET> extends AppCompatActivity {
+public class LogIn extends AppCompatActivity {
 
     Button btLogin;
     TextView btSignin;
@@ -33,33 +33,27 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
         btSignin = findViewById(R.id.signInButon);
         btLogin = findViewById(R.id.Loginbtn);
 
-        btSignin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LogIn.this, SignUp.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
+        btSignin.setOnClickListener(v -> {
+            Intent intent = new Intent(LogIn.this, SignUp.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
         });
 
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (CheckLoginData()) {
+        btLogin.setOnClickListener(v -> {
+            if (CheckLoginData()) {
 
-                    Intent intent = new Intent(LogIn.this, Home.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(LogIn.this, Home.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         });
     }
 
     public boolean CheckLoginData() {
-        Connection connect = null;
+        Connection connect;
         boolean autenticated = false;
-        EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
-        EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
+        EditText inMailET = findViewById(R.id.inputEmailAddress);
+        EditText inPasswordET = findViewById(R.id.inputPassword);
 
         if (CheckIfFilled(inMailET.getText().toString(), inPasswordET.getText().toString())) {
             //connection with database
@@ -134,12 +128,12 @@ public class LogIn<inPasswordET> extends AppCompatActivity {
     public boolean CheckIfFilled(String text1, String text2){
         boolean FilledIn = true;
         if(TextUtils.isEmpty(text1)){
-            EditText inMailET = (EditText) findViewById(R.id.inputEmailAddress);
+            EditText inMailET = findViewById(R.id.inputEmailAddress);
             inMailET.setError("Fill in email");
             FilledIn = false;
         }
         if(TextUtils.isEmpty(text2)){
-            EditText inPasswordET = (EditText) findViewById(R.id.inputPassword);
+            EditText inPasswordET = findViewById(R.id.inputPassword);
             inPasswordET.setError("Fill in password");
             FilledIn = false;
         }

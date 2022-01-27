@@ -53,10 +53,6 @@
             android:exported="true" />
         <activity
             android:screenOrientation="portrait"
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
-            android:screenOrientation="portrait"
             android:name=".Home"
             android:exported="true" />
 

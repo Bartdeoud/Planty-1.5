@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -32,8 +33,6 @@ import java.io.OutputStream;
 
 public class addplant2 extends AppCompatActivity {
 
-    Button btOpen;
-
     public static Bitmap imagePlant;
     public static String plantName = "";
 
@@ -42,53 +41,16 @@ public class addplant2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addplant2);
 
-        btOpen = findViewById(R.id.button_picture);
-
         //Request camera permissions
-        if (ContextCompat.checkSelfPermission(addplant2.this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(addplant2.this,
-                    new String[]{
-                            Manifest.permission.CAMERA
-                    },
-                    100);
-
+        if (ContextCompat.checkSelfPermission(addplant2.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(addplant2.this, new String[]{Manifest.permission.CAMERA}, 100);
         }
-        if(ContextCompat.checkSelfPermission(addplant2.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(addplant2.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    1);
+        if(ContextCompat.checkSelfPermission(addplant2.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(addplant2.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
-        if(ContextCompat.checkSelfPermission(addplant2.this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(addplant2.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    1);
+        if(ContextCompat.checkSelfPermission(addplant2.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(addplant2.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
-        btOpen.setOnClickListener(v -> {
-            if(CheckIFFilled()) {
-                //saves plant name
-                TextView text = findViewById(R.id.etGivePlantName);
-                plantName = text.getText().toString();
-                //checks if plant count is higher than 6
-                String query = "select PrivatePlantnummer from Plant Where Gebruikercode = '" + gebruikerCode + "' order by PrivatePlantnummer";
-                int Plants = 1;
-                try {
-                    Plants = Integer.parseInt(commitQuery(query));
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-
-                if (!(Plants >= 6)){
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, 100);
-                } else{
-                    text.setError("You have reached the limit of plants that you can store");
-                }
-
-            }
-        });
     }
 
     @Override
@@ -159,6 +121,30 @@ public class addplant2 extends AppCompatActivity {
     }
 
     public void makePicture(View view) {
+        if (ContextCompat.checkSelfPermission(addplant2.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(addplant2.this, "The application does not have the right to use the camera", Toast.LENGTH_SHORT).show();
+        } else {
+            if (CheckIFFilled()) {
+                //saves plant name
+                TextView text = findViewById(R.id.etGivePlantName);
+                plantName = text.getText().toString();
+                //checks if plant count is higher than 6
+                String query = "select PrivatePlantnummer from Plant Where Gebruikercode = '" + gebruikerCode + "' order by PrivatePlantnummer";
+                int Plants = 1;
+                try {
+                    Plants = Integer.parseInt(commitQuery(query));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+
+                if (!(Plants >= 6)) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, 100);
+                } else {
+                    text.setError("You have reached the limit of plants that you can store");
+                }
+            }
+        }
     }
 
     public void buttonGotoHome3(View view) {

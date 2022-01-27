@@ -77,7 +77,7 @@ public class WateringCycle extends AppCompatActivity {
     public void loadPlantValues(){
         if (plantNames != null) {
             ConnectionClass connectionClass;
-            String result = "";
+            String result = "0";
 
             connectionClass = new ConnectionClass();
             try {

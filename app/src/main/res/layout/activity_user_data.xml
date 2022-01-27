@@ -12,6 +12,22 @@
     android:paddingBottom="10dp"
     tools:context=".userData">
 
+    <Button
+        android:id="@+id/buttonGotoHome5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/berde"
+        android:onClick="buttonGotoHome"
+        app:icon="?attr/homeAsUpIndicator"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="50dp"
+        app:iconTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/ProfilePictureProfile"
         android:layout_width="110dp"
@@ -238,7 +254,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#0C400D"
-        android:onClick="changeProfile"
+        android:onClick="Validator"
         android:text="Change information"
         android:textAlignment="center"
         android:textColor="@color/white"

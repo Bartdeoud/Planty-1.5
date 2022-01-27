@@ -70,13 +70,11 @@ public class SignUp extends AppCompatActivity {
     }
 
     public String GetEnqKey(){
-        EditText email2 = email;
         EditText password2 = password;
-        String email = email2.getText().toString();
         String password = password2.getText().toString();
 
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(email);
+        encryptor.setPassword(password);
         return encryptor.encrypt(password);
     }
 

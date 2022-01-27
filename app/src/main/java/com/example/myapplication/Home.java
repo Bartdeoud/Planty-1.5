@@ -180,7 +180,6 @@ public class Home extends AppCompatActivity {
     public void buttonGotoWateringcycle(View view) {
         Intent intent = new Intent(Home.this, WateringCycle.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra("Load", "true");
         startActivity(intent);
     }
 

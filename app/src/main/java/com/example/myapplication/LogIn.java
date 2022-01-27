@@ -100,6 +100,7 @@ public class LogIn extends AppCompatActivity {
             EditText email2 = findViewById(R.id.inputEmailAddress);
             EditText password2 = findViewById(R.id.inputPassword);
             String email = email2.getText().toString();
+            String password = password2.getText().toString();
 
             if(key.equals("")){
                 email2.setError("Email does not exist");
@@ -107,7 +108,7 @@ public class LogIn extends AppCompatActivity {
             }
             else {
                 StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-                encryptor.setPassword(email);
+                encryptor.setPassword(password);
 
                 String decrypted = encryptor.decrypt(key);
                 if (decrypted.equals(password2.getText().toString())) {
@@ -120,6 +121,9 @@ public class LogIn extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            EditText password2 = findViewById(R.id.inputPassword);
+            password2.setText("");
+            password2.setError("Password incorrect");
         }
         return false;
     }
